@@ -1,3 +1,4 @@
-﻿module app.common {
-    angular.module("common.services", ["ngResource"]);
+﻿namespace app.services {
+    export const moduleName = 'common.services';
+    angular.module(moduleName, ["ngResource"]);
 }

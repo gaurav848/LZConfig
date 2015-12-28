@@ -1,4 +1,4 @@
-﻿module app.ApplicationList {
+﻿namespace app.ApplicationList {
     interface IApplicationListModel {
         title: string;
         applications: app.domain.IApplication[];
@@ -10,7 +10,7 @@
         applications: app.domain.IApplication[];
 
         static $inject = ["dataAccessService"];
-        constructor(private dataAccessService: app.common.DataAccessService) {
+        constructor(private dataAccessService: app.services.DataAccessService) {
             this.title = "Application List";
             this.applications = [];
 

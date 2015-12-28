@@ -1,4 +1,4 @@
-﻿module app.ApplicationDetail {
+﻿namespace app.ApplicationDetail {
     
     interface IApplicationDetailModel {
         title: string;
@@ -15,7 +15,7 @@
 
         static $inject = ["$routeParams", "dataAccessService"];
         constructor(private $routeParams: IApplicationParams,
-            private dataAccessService: app.common.DataAccessService) {
+            private dataAccessService: app.services.DataAccessService) {
             this.title = "Application Detail";
 
             var applicationResource = dataAccessService.getApplicationResource();
