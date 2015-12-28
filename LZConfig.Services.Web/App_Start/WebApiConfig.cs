@@ -2,16 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.OData.Builder;
 using System.Web.OData.Extensions;
 using Lubrizol.LZConfig.Entities;
 
-namespace LZConfig.Services.Web
+namespace Lubrizol.LZConfig.Services.Web
 {
     public static class WebApiConfig
     {
         public static void Register(HttpConfiguration config)
         {
+
+
+            var cors = new EnableCorsAttribute("*", "*", "*");
+            cors.SupportsCredentials = true;
+            config.EnableCors(cors);
             // Web API configuration and services
 
             // Web API routes
@@ -25,6 +31,8 @@ namespace LZConfig.Services.Web
 
             ODataModelBuilder builder = new ODataConventionModelBuilder();
             builder.EntitySet<tblApplication>("Applications");
+            builder.EntitySet<tblApplicationConnection>("ApplicationConnections");
+            builder.EntitySet<tblApplicationVariable>("ApplicationVariables");
             config.MapODataServiceRoute(
                 routeName:"ODataRoute",
                 routePrefix:null,

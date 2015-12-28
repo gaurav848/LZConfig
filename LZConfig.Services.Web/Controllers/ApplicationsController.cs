@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -14,7 +15,7 @@ using System.Web.OData.Routing;
 using Lubrizol.LZConfig.Data;
 using Lubrizol.LZConfig.Entities;
 
-namespace LZConfig.Services.Web.Controllers
+namespace Lubrizol.LZConfig.Services.Web.Controllers
 {
     /*
     The WebApiConfig class may require additional changes to add a route for this controller. Merge these statements into the Register method of the WebApiConfig class as applicable. Note that OData URLs are case sensitive.
@@ -36,6 +37,7 @@ namespace LZConfig.Services.Web.Controllers
         [EnableQuery]
         public IQueryable<tblApplication> GetApplications()
         {
+            Debug.WriteLine("Called Service at {0}", DateTime.Now);
             return db.tblApplication;
         }
 
