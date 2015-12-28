@@ -1,4 +1,4 @@
-﻿namespace app
+﻿namespace lzconfig
 {
     var main = angular.module("LZConfig",
         ["ngRoute", "common.services"]);

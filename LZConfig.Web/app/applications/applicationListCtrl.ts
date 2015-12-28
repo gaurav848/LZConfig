@@ -1,16 +1,16 @@
 ﻿namespace app.ApplicationList {
     interface IApplicationListModel {
         title: string;
-        applications: app.domain.IApplication[];
+        applications: lzconfig.domain.IApplication[];
     }
 
     class ApplicationListCtrl implements IApplicationListModel {
         title: string;    
 
-        applications: app.domain.IApplication[];
+        applications: lzconfig.domain.IApplication[];
 
         static $inject = ["dataAccessService"];
-        constructor(private dataAccessService: app.services.DataAccessService) {
+        constructor(private dataAccessService: lzconfig.services.DataAccessService) {
             this.title = "Application List";
             this.applications = [];
 

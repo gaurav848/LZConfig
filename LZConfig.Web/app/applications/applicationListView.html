@@ -9,14 +9,14 @@
                 <tr>
                     <td>Name</td>
                     <td>Description</td>
-                    <td>CreateDate</td>
+                    <td>CreatedDate</td>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="app in vm.applications">
                     <td><a ng-href="#applicationDetail/{{app.ID}}">{{ app.Name}}</a></td>
                     <td>{{app.Description}}</td>
-                    <td>{{app.CreatedDate | date:'medium'}}</td>
+                    <td>{{app.CreatedDate | date:'yyyy-MMM-dd'}}</td>
                 </tr>
             </tbody>
         </table>

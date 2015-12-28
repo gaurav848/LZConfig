@@ -1,8 +1,9 @@
-﻿namespace app.ApplicationDetail {
+﻿namespace lzconfig.ApplicationDetail {
     
     interface IApplicationDetailModel {
         title: string;
-        application: app.domain.IApplication;
+        application: lzconfig.domain.IApplication;
+        cancel(): void;
     }
 
     interface IApplicationParams extends ng.route.IRouteParamsService {
@@ -11,17 +12,22 @@
 
     class ApplicationDetailCtrl implements IApplicationDetailModel {
         title: string;
-        application: app.domain.IApplication;
+        application: lzconfig.domain.IApplication;
 
-        static $inject = ["$routeParams", "dataAccessService"];
+        cancel() {
+            this.$location.path("/applicationList");
+        }
+
+        static $inject = ["$routeParams", "dataAccessService", "$location"];
         constructor(private $routeParams: IApplicationParams,
-            private dataAccessService: app.services.DataAccessService) {
+            private dataAccessService: lzconfig.services.DataAccessService,
+            private $location: ng.ILocationService) {
             this.title = "Application Detail";
 
             var applicationResource = dataAccessService.getApplicationResource();
 
             applicationResource.get({ id: $routeParams.id },
-                (data: app.domain.IApplication) => {
+                (data: lzconfig.domain.IApplication) => {
                     this.application = data;
                 }
             );
