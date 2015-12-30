@@ -1,15 +1,15 @@
 ﻿namespace lzconfig.domain {
     
     export interface IApplication {
-        id: string;
-        name: string;
-        url: string;
-        description: string;
-        createdDate: Date;
+        ID: string;
+        Name: string;
+        URL: string;
+        Description: string;
+        CreatedDate: Date;
     }
     
     export class App implements IApplication {
-        constructor(public id: string, public name: string, public description: string, public url: string,  public createdDate: Date) {
+        constructor(public ID: string, public Name: string, public Description: string, public URL: string,  public CreatedDate: Date) {
             
         }
     }

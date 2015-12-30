@@ -16,19 +16,7 @@
 
             var applicationResource = dataAccessService.getApplicationResource();
 
-            var config = {
-                url: "http://localhost:3523/Applications",
-                method: "GET",
-                isArray: false,
-                transformResponse: function(data, headers) {
-                    return angular.fromJson(data).value;
-                }
-            };
-
-            //applicationResource.get(config, (data: app.domain.IApplication[]) => {
-            //    this.applications = data;
-            //});
-            applicationResource.get()
+            applicationResource.query()
                 .$promise
                 .then((data: any) => { this.applications = data.value})
                 .catch((response) => {console.log(response)});

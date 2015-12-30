@@ -63,6 +63,9 @@ namespace Lubrizol.LZConfig.Services.Web.Controllers
             {
                 return NotFound();
             }
+            //dawa: update
+            patch.GetEntity().ModifiedDate = DateTime.Now;
+            //patch.GetEntity().ModifiedBy = User.Identity.Name;
 
             patch.Put(tblApplication);
 
