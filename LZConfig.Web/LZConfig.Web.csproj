@@ -119,8 +119,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\applications\applicationConnectionsView.html" />
     <Content Include="app\applications\applicationDetailView.html" />
     <Content Include="app\applications\applicationListView.html" />
+    <Content Include="app\applications\applicationVariablesView.html" />
+    <Content Include="app\applications\applicationView.html" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -962,7 +965,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\blocks\" />
     <Folder Include="app\components\" />
     <Folder Include="app\controllers\" />
     <Folder Include="app\layout\" />
@@ -972,8 +974,9 @@
   <ItemGroup>
     <TypeScriptCompile Include="app\app.ts" />
     <TypeScriptCompile Include="app\applications\application.ts" />
-    <TypeScriptCompile Include="app\applications\applicationDetailCtrl.ts" />
-    <TypeScriptCompile Include="app\applications\applicationListCtrl.ts" />
+    <TypeScriptCompile Include="app\applications\applicationController.ts" />
+    <TypeScriptCompile Include="app\applications\applicationDetailController.ts" />
+    <TypeScriptCompile Include="app\applications\applicationListController.ts" />
     <TypeScriptCompile Include="app\common\services\common.services.ts" />
     <TypeScriptCompile Include="app\common\services\dataAccessService.ts" />
     <TypeScriptCompile Include="scripts\typings\angularjs\angular-animate.d.ts" />

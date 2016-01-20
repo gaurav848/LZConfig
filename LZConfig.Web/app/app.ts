@@ -17,13 +17,13 @@
             .when("/applicationList",
             {
                 templateUrl: "app/applications/applicationListView.html",
-                controller: "ApplicationListCtrl",
+                controller: "ApplicationListController",
                 controllerAs: "vm"
             })
-            .when("/applicationDetail/:id",
+            .when("/application/:id",
             {
-                templateUrl: "app/applications/applicationDetailView.html",
-                controller: "ApplicationDetailCtrl",
+                templateUrl: "app/applications/applicationView.html",
+                controller: "ApplicationController",
                 controllerAs: "vm"
             })
             .otherwise("/applicationList");

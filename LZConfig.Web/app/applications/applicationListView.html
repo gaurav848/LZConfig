@@ -14,7 +14,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="app in vm.applications">
-                    <td><a ng-href="#applicationDetail/{{app.ID}}">{{ app.Name}}</a></td>
+                    <td><a ng-href="#application/{{app.ID}}">{{ app.Name}}</a></td>
                     <td>{{app.Description}}</td>
                     <td>{{app.CreatedDate | date:'yyyy-MMM-dd'}}</td>
                 </tr>

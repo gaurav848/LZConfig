@@ -1,10 +1,10 @@
-﻿namespace app.ApplicationList {
-    interface IApplicationListModel {
+﻿namespace lzconfig {
+    export interface IApplicationListController {
         title: string;
         applications: lzconfig.domain.IApplication[];
     }
 
-    class ApplicationListCtrl implements IApplicationListModel {
+    export class ApplicationListController implements IApplicationListController {
         title: string;    
 
         applications: lzconfig.domain.IApplication[];
@@ -25,6 +25,6 @@
 
     angular
         .module("LZConfig")
-        .controller("ApplicationListCtrl",
-            ApplicationListCtrl);
+        .controller("ApplicationListController",
+            ApplicationListController);
 }

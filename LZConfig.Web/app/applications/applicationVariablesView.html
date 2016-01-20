@@ -1,0 +1,20 @@
+﻿<div class="panel-body">
+    <table class="table">
+        <thead>
+            <tr>
+                <td>Variable Name</td>
+                <td>Variable Value</td>
+                <td>Modified By</td>
+                <td>Modified Date</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="var in vm.application.tblApplicationVariable">
+                <td>{{var.Name}}</td>
+                <td>{{var.Value}}</td>
+                <td>{{var.ModifiedBy}}</td>
+                <td>{{var.ModifiedDate | date:'yyyy-MMM-dd'}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

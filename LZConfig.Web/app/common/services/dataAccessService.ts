@@ -29,16 +29,16 @@
                 url: "http://localhost:3523/Applications",
                 isArray: false
             };
-            const getAction: ng.resource.IActionDescriptor = {
-                method: 'GET',
-                url: "http://localhost:3523/Applications(:id)",
-                params: { ID: "@ID" }
-            };
             //const getAction: ng.resource.IActionDescriptor = {
             //    method: 'GET',
             //    url: "http://localhost:3523/Applications(:id)",
-            //    params: { $expand: "tblApplicationConnection,tblApplicationVariable"}
+            //    params: { ID: "@ID" }
             //};
+            const getAction: ng.resource.IActionDescriptor = {
+                method: 'GET',
+                url: "http://localhost:3523/Applications(:id)",
+                params: { $expand: "tblApplicationConnection,tblApplicationVariable"}
+            };
             const createAction: ng.resource.IActionDescriptor = {
                 method: 'POST',
                 url: "http://localhost:3523/Applications(:ID)",

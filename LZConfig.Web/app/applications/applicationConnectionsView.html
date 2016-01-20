@@ -1,0 +1,22 @@
+﻿<div class="panel-body">
+    <table class="table">
+        <thead>
+            <tr>
+                <td>Connection Name</td>
+                <td>Connection String</td>
+                <td>Command Timeout</td>
+                <td>Modified By</td>
+                <td>Modified Date</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="conn in vm.application.tblApplicationConnection">
+                <td>{{conn.Name}}</td>
+                <td>{{conn.ConnectionString}}</td>
+                <td>{{conn.CommandTimeout}}</td>
+                <td>{{conn.ModifiedBy}}</td>
+                <td>{{conn.ModifiedDate | date:'yyyy-MMM-dd'}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
