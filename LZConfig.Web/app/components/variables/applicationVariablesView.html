@@ -1,20 +1,34 @@
 ﻿<div class="panel-body">
     <table class="table">
         <thead>
-            <tr>
-                <td>Variable Name</td>
-                <td>Variable Value</td>
-                <td>Modified By</td>
-                <td>Modified Date</td>
-            </tr>
+        <tr>
+            <td>Variable Name</td>
+            <td>Variable Value</td>
+            <td>Modified By</td>
+            <td>Modified Date</td>
+        </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="var in vm.application.tblApplicationVariable">
-                <td>{{var.Name}}</td>
-                <td>{{var.Value}}</td>
-                <td>{{var.ModifiedBy}}</td>
-                <td>{{var.ModifiedDate | date:'yyyy-MMM-dd'}}</td>
-            </tr>
+        <tr ng-repeat="var in vm.application.tblApplicationVariable" ng-include="vm.getTemplate(var)"></tr>
         </tbody>
     </table>
+
+    <script type="text/ng-template" id="display">
+        <td>{{var.Name}}</td>
+        <td>{{var.Value}}</td>
+        <td>{{var.ModifiedBy}}</td>
+        <td>{{var.ModifiedDate | date:'yyyy-MMM-dd'}}</td>
+        <td>
+            <button ng-click="vm.editVariable(var)"><!--<img src="/CommonEnterprise/images/editdelete.gif" />--> edit</button>
+        </td>
+    </script>
+
+    <script type="text/ng-template" id="edit">
+        <td><input type="text" ng-model="var.Name" /></td>
+        <td><input type="text" ng-model="var.Value" /></td>
+        <td>
+            <button ng-click="vm.saveVariable(var)">Save</button>
+            <button ng-click="vm.cancelEditVariable()">Cancel</button>
+        </td>
+    </script>
 </div>

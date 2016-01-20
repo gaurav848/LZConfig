@@ -12,6 +12,8 @@
 
         application: lzconfig.domain.IApplication;
 
+        selected:lzconfig.domain.IApplicationVariable;
+
         onClickTab(tab) {
             this.currentTab = tab.url;
         }
@@ -23,6 +25,23 @@
 
         isActiveTab(tabUrl: string) {
             return tabUrl === this.currentTab;
+        }
+
+        getTemplate(variable): string {
+            console.log("variable:" + JSON.stringify(variable));
+            if (!this.selected)
+                return 'display';
+
+            if (variable.Name === this.selected.Name) return 'edit';
+            else return 'display';
+        }
+
+        editVariable = function (variable) {
+            this.selected = angular.copy(variable);
+        };
+
+        cancelEditVariable = function() {
+            this.selected = null;
         }
 
         static $inject = ["$routeParams", "dataAccessService", "$location", "$filter"];

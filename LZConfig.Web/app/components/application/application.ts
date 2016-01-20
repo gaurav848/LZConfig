@@ -13,4 +13,16 @@
             
         }
     }
+
+
+    export interface IApplicationVariable {
+        ApplicationID: string;
+        Name: string;
+        Value: string;
+        Secure: boolean;
+        CreatedBy: string;
+        CreatedDate: Date;
+        ModifiedBy: string;
+        ModifiedDate: Date;
+    }
 }
