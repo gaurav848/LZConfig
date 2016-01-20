@@ -11,6 +11,7 @@
     export interface IDataAccessService {
             
         getApplicationResource(): ng.resource.IResourceClass<IApplicationResource>;
+        getVariableResource(): ng.resource.IResourceClass<IApplicationResource>;
         performUpdate: boolean;
     }
 
@@ -68,6 +69,40 @@
             return this.$resource("http://localhost:3523/Applications(:id)", null, {
                 query: queryAction,
                 get: getAction,
+                save: saveAction,
+                delete: deleteAction,
+                create: createAction
+            });
+        }
+
+        getVariableResource(): ng.resource.IResourceClass<IApplicationResource> {
+            const createAction: ng.resource.IActionDescriptor = {
+                method: 'POST',
+                url: "http://localhost:3523/ApplicationVariables(:ID)",
+                params: { ID: "@ID" },
+                isArray: false
+            };
+            const updateAction: ng.resource.IActionDescriptor = {
+                method: 'PUT',
+                url: "http://localhost:3523/ApplicationVariables(:ID)",
+                params: { ID: "@ID" }
+            };
+            const deleteAction: ng.resource.IActionDescriptor = {
+                method: 'DELETE',
+                url: "http://localhost:3523/ApplicationVariables(:ID)",
+                params: { ID: "@ID" },
+                isArray: false
+            };
+
+            var saveAction: ng.resource.IActionDescriptor;
+            if (this.performUpdate)
+                saveAction = updateAction;
+            else
+                saveAction = createAction;
+
+            //angular.extend(this.$resource.prototype, 
+
+            return this.$resource("http://localhost:3523/ApplicationVariables(:id)", null, {
                 save: saveAction,
                 delete: deleteAction,
                 create: createAction

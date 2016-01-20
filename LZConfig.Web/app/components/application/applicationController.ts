@@ -19,8 +19,8 @@
         }
 
         setActiveTab(tabUrl: string) {
+      //      console.log("setActiveTab:" + tabUrl);
             this.currentTab = tabUrl;
-            console.log("setActiveTab:" + tabUrl);
         }
 
         isActiveTab(tabUrl: string) {
@@ -28,7 +28,7 @@
         }
 
         getTemplate(variable): string {
-            console.log("variable:" + JSON.stringify(variable));
+           // console.log("variable:" + JSON.stringify(variable));
             if (!this.selected)
                 return 'display';
 
@@ -42,6 +42,18 @@
 
         cancelEditVariable = function() {
             this.selected = null;
+        }
+
+        saveVariable(variable: lzconfig.domain.IApplicationVariable) {
+            console.log("saveVariable:" + JSON.stringify(variable));
+
+            var applicationVariableResource = this.dataAccessService.getVariableResource();
+
+            applicationVariableResource.save(this.application)
+                .$promise
+                .then((data: any) => { console.log(data) })
+                .catch((response) => { console.log(response) });
+
         }
 
         static $inject = ["$routeParams", "dataAccessService", "$location", "$filter"];

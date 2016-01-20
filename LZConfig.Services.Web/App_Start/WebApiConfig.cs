@@ -13,8 +13,6 @@ namespace Lubrizol.LZConfig.Services.Web
     {
         public static void Register(HttpConfiguration config)
         {
-
-
             var cors = new EnableCorsAttribute("*", "*", "*");
             cors.SupportsCredentials = true;
             config.EnableCors(cors);
@@ -30,18 +28,18 @@ namespace Lubrizol.LZConfig.Services.Web
             );
 
             ODataModelBuilder builder = new ODataConventionModelBuilder();
+
             var applications = builder.EntitySet<tblApplication>("Applications");
             applications.EntityType.HasMany(x => x.tblApplicationConnection);
             applications.EntityType.HasMany(x => x.tblApplicationVariable);
             builder.EntitySet<tblApplicationConnection>("ApplicationConnections");
             builder.EntitySet<tblApplicationVariable>("ApplicationVariables");
+
             config.MapODataServiceRoute(
                 routeName:"ODataRoute",
                 routePrefix:null,
                 model:builder.GetEdmModel()
                 );
-
-
         }
     }
 }
