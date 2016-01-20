@@ -16,13 +16,13 @@
         $routeProvider
             .when("/applicationList",
             {
-                templateUrl: "app/applications/applicationListView.html",
+                templateUrl: "app/components/applications/applicationListView.html",
                 controller: "ApplicationListController",
                 controllerAs: "vm"
             })
             .when("/application/:id",
             {
-                templateUrl: "app/applications/applicationView.html",
+                templateUrl: "app/components/application/applicationView.html",
                 controller: "ApplicationController",
                 controllerAs: "vm"
             })
