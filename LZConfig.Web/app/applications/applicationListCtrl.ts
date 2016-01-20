@@ -11,7 +11,7 @@
 
         static $inject = ["dataAccessService"];
         constructor(private dataAccessService: lzconfig.services.DataAccessService) {
-            this.title = "Application List";
+            this.title = "Applications";
             this.applications = [];
 
             var applicationResource = dataAccessService.getApplicationResource();
