@@ -2,8 +2,12 @@
 
     export interface IApplicationResource
         extends ng.resource.IResource<lzconfig.domain.IApplication> {
-        //create(data: any): lzconfig.domain.IApplication;
     }
+
+    export interface IApplicationVariableResource
+        extends ng.resource.IResource<lzconfig.domain.IApplicationVariable> {
+    }
+
 
     export interface ICustomApplicationResource extends ng.resource.IResourceClass<IApplicationResource> {
     }
@@ -11,7 +15,7 @@
     export interface IDataAccessService {
             
         getApplicationResource(): ng.resource.IResourceClass<IApplicationResource>;
-        getVariableResource(): ng.resource.IResourceClass<IApplicationResource>;
+        getApplicationVariableResource(): ng.resource.IResourceClass<IApplicationVariableResource>;
         performUpdate: boolean;
     }
 
@@ -64,8 +68,6 @@
             else
                 saveAction = createAction;
 
-            //angular.extend(this.$resource.prototype, 
-
             return this.$resource("http://localhost:3523/Applications(:id)", null, {
                 query: queryAction,
                 get: getAction,
@@ -75,34 +77,33 @@
             });
         }
 
-        getVariableResource(): ng.resource.IResourceClass<IApplicationResource> {
+        getApplicationVariableResource(): ng.resource.IResourceClass<IApplicationVariableResource> {
             const createAction: ng.resource.IActionDescriptor = {
                 method: 'POST',
-                url: "http://localhost:3523/ApplicationVariables(:ID)",
+                url: "http://localhost:3523/ApplicationVariables(:ID,:name)",
                 params: { ID: "@ID" },
                 isArray: false
             };
             const updateAction: ng.resource.IActionDescriptor = {
                 method: 'PUT',
-                url: "http://localhost:3523/ApplicationVariables(:ID)",
+                url: "http://localhost:3523/ApplicationVariables(:ID,:name)",
                 params: { ID: "@ID" }
             };
             const deleteAction: ng.resource.IActionDescriptor = {
                 method: 'DELETE',
-                url: "http://localhost:3523/ApplicationVariables(:ID)",
+                url: "http://localhost:3523/ApplicationVariables(:ID,:name)",
                 params: { ID: "@ID" },
                 isArray: false
             };
 
             var saveAction: ng.resource.IActionDescriptor;
+
             if (this.performUpdate)
                 saveAction = updateAction;
             else
                 saveAction = createAction;
 
-            //angular.extend(this.$resource.prototype, 
-
-            return this.$resource("http://localhost:3523/ApplicationVariables(:id)", null, {
+            return this.$resource("http://localhost:3523/ApplicationVariables(:ID:name)", null, {
                 save: saveAction,
                 delete: deleteAction,
                 create: createAction

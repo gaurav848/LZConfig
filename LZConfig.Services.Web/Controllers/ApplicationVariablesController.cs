@@ -27,6 +27,7 @@ namespace Lubrizol.LZConfig.Services.Web.Controllers
     builder.EntitySet<tblApplication>("tblApplication"); 
     config.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
+   // [ODataRoutePrefix("ApplicationVariables")]
     public class ApplicationVariablesController : ODataController
     {
         private LZConfigContext db = new LZConfigContext();
@@ -39,10 +40,15 @@ namespace Lubrizol.LZConfig.Services.Web.Controllers
         }
 
         // GET: odata/ApplicationVariables(5)
+        [ODataRoute("ApplicationVariables(ApplicationID={id},Name={name})")]
         [EnableQuery]
-        public SingleResult<tblApplicationVariable> GettblApplicationVariable([FromODataUri] Guid key)
+        public SingleResult<tblApplicationVariable> Get([FromODataUri] Guid id, [FromODataUri] string name)
         {
-            return SingleResult.Create(db.tblApplicationVariable.Where(tblApplicationVariable => tblApplicationVariable.ApplicationID == key));
+            return SingleResult.Create(db.tblApplicationVariable
+                .Where(
+                    tblApplicationVariable =>
+                        tblApplicationVariable.ApplicationID == id && tblApplicationVariable.Name == name));
+
         }
 
         // PUT: odata/ApplicationVariables(5)

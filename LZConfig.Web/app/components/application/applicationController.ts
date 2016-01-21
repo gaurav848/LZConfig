@@ -47,8 +47,9 @@
         saveVariable(variable: lzconfig.domain.IApplicationVariable) {
             console.log("saveVariable:" + JSON.stringify(variable));
 
-            var applicationVariableResource = this.dataAccessService.getVariableResource();
+            var applicationVariableResource = this.dataAccessService.getApplicationVariableResource();
 
+            this.dataAccessService.performUpdate =true;
             applicationVariableResource.save(this.application)
                 .$promise
                 .then((data: any) => { console.log(data) })
