@@ -157,9 +157,10 @@ namespace Lubrizol.LZConfig.Services.Web.Controllers
         }
 
         // DELETE: odata/ApplicationVariables(5)
-        public IHttpActionResult Delete([FromODataUri] Guid key)
+        [ODataRoute("ApplicationVariables(ApplicationID={applicationId},Name={name})")]
+        public IHttpActionResult Delete([FromODataUri] Guid applicationId, [FromODataUri] string name)
         {
-            tblApplicationVariable tblApplicationVariable = db.tblApplicationVariable.Find(key);
+            tblApplicationVariable tblApplicationVariable = db.tblApplicationVariable.Find(new object[] {applicationId,name});
             if (tblApplicationVariable == null)
             {
                 return NotFound();

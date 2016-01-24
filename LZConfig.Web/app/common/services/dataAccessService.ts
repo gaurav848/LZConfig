@@ -23,10 +23,11 @@
     export class DataAccessService
         implements IDataAccessService {
 
-        performUpdate: boolean;
+        public performUpdate: boolean;
 
         static $inject = ["$resource"];
         constructor(private $resource: ng.resource.IResourceService) {
+            this.performUpdate = true;
         }
 
         getApplicationResource(): ng.resource.IResourceClass<IApplicationResource> {
@@ -94,11 +95,12 @@
             };
             const deleteAction: ng.resource.IActionDescriptor = {
                 method: 'DELETE',
-                url: "http://localhost/LZConfig.Services/ApplicationVariables(:ID,:Name)",
-                params: { ID: "@ID", Name: "@Name"  },
+                url: "http://localhost/LZConfig.Services/ApplicationVariables(ApplicationID=:ID,Name='" + ":Name'" + ")",
+                params: { ID: "@ApplicationID", Name: "@Name" },
                 isArray: false
             };
 
+            console.log("perform update:" + this.performUpdate);
             var saveAction: ng.resource.IActionDescriptor;
             if (this.performUpdate)
                 saveAction = updateAction;
