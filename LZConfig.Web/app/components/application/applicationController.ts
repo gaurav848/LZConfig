@@ -40,9 +40,10 @@
             this.selected = angular.copy(variable);
         };
 
-        deleteVariable = function (variable) {
+        deleteVariable = function (variable: lzconfig.domain.IApplicationVariable) {
+            console.log("deleteVariable:" + JSON.stringify(variable));
             var applicationVariableResource = this.dataAccessService.getApplicationVariableResource();
-            this.dataAccessService.performUpdate = true;
+            //this.dataAccessService.performUpdate = true;
             applicationVariableResource.delete(variable)
                 .$promise
                 .then((data: any) => { console.log(data) })

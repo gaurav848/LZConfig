@@ -110,7 +110,7 @@
             saveAction = updateAction;
             //angular.extend(this.$resource.prototype, 
 
-            return this.$resource("http://localhost/LZConfig.Services/ApplicationVariables(:id)", null, {
+            return this.$resource("http://localhost/LZConfig.Services/ApplicationVariables(ApplicationID=:ID,Name='" + ":Name'" + ")", null, {
                 save: saveAction,
                 delete: deleteAction,
                 create: createAction
