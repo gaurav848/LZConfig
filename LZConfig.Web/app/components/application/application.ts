@@ -8,15 +8,14 @@
         CreatedDate: Date;
     }
     
-    export class App implements IApplication {
-        constructor(public ID: string, public Name: string, public Description: string, public URL: string,  public CreatedDate: Date) {
-            
+    export class Application implements IApplication {
+        constructor(public ID: string, public Name: string, public Description: string, public URL: string,  public CreatedDate: Date) {          
         }
     }
 
 
     export interface IApplicationVariable {
-        ApplicationID: string;
+        ID: string;
         Name: string;
         Value: string;
         Secure: boolean;
@@ -25,4 +24,17 @@
         ModifiedBy: string;
         ModifiedDate: Date;
     }
+
+    export class ApplicationVariable implements IApplicationVariable {
+        constructor(public ID: string,
+            public Name: string,
+            public Value: string,
+            public Secure: boolean,
+            public CreatedBy: string,
+            public CreatedDate: Date,
+            public ModifiedBy: string,
+            public ModifiedDate: Date) {
+        }
+    }
+
 }

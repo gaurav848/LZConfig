@@ -30,10 +30,11 @@ namespace Lubrizol.LZConfig.Services.Web
             ODataModelBuilder builder = new ODataConventionModelBuilder();
 
             var applications = builder.EntitySet<tblApplication>("Applications");
-            applications.EntityType.HasMany(x => x.tblApplicationConnection);
-            applications.EntityType.HasMany(x => x.tblApplicationVariable);
             builder.EntitySet<tblApplicationConnection>("ApplicationConnections");
             builder.EntitySet<tblApplicationVariable>("ApplicationVariables");
+
+            applications.EntityType.HasMany(x => x.tblApplicationConnection);
+            applications.EntityType.HasMany(x => x.tblApplicationVariable);
 
             config.MapODataServiceRoute(
                 routeName:"ODataRoute",

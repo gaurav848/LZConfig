@@ -40,6 +40,16 @@
             this.selected = angular.copy(variable);
         };
 
+        deleteVariable = function (variable: lzconfig.domain.IApplicationVariable) {
+            console.log("deleteVariable:" + JSON.stringify(variable));
+            var applicationVariableResource = this.dataAccessService.getApplicationVariableResource();
+            //this.dataAccessService.performUpdate = true;
+            applicationVariableResource.delete(variable)
+                .$promise
+                .then((data: any) => { console.log(data) })
+                .catch((response) => { console.log(response) });
+        };
+
         cancelEditVariable = function() {
             this.selected = null;
         }
@@ -48,9 +58,8 @@
             console.log("saveVariable:" + JSON.stringify(variable));
 
             var applicationVariableResource = this.dataAccessService.getApplicationVariableResource();
-
-            this.dataAccessService.performUpdate =true;
-            applicationVariableResource.save(this.application)
+            this.dataAccessService.performUpdate = true;
+            applicationVariableResource.save(variable)
                 .$promise
                 .then((data: any) => { console.log(data) })
                 .catch((response) => { console.log(response) });
@@ -63,8 +72,12 @@
             private $location: ng.ILocationService) {
 
             this.title = "Application"
-            this.tabs = [{ title: "Application", url: "app/components/application/applicationDetailView.html" }, { title: "Connection Strings", url: "app/components/connections/applicationConnectionsView.html" }, { title: "Application Variables", url: "app/components/variables/applicationVariablesView.html" }];
-            this.currentTab = "app/components/application/applicationDetailView.html";
+            this.tabs = [
+                { title: "Application", url: "LZConfig/app/components/application/applicationDetailView.html" },
+                { title: "Connection Strings", url: "LZConfig/app/components/connections/applicationConnectionsView.html" },
+                { title: "Application Variables", url: "LZConfig/app/components/variables/applicationVariablesView.html" }
+            ];
+            this.currentTab = "LZConfig/app/components/application/applicationDetailView.html";
 
             var applicationResource = dataAccessService.getApplicationResource();
 
