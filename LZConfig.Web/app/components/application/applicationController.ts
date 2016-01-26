@@ -50,6 +50,12 @@
                 .catch((response) => { console.log(response) });
         };
 
+        newVariable = function() {
+            console.log("newVariable called");
+            var variable = new lzconfig.domain.ApplicationVariable(this.application.ID, null, null, null, null, null, null, null);
+            console.log("newVariable:" + JSON.stringify(variable));
+            this.application.tblApplicationVariable.push(variable);
+        }
         cancelEditVariable = function() {
             this.selected = null;
         }

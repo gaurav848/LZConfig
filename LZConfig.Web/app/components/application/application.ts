@@ -6,10 +6,11 @@
         URL: string;
         Description: string;
         CreatedDate: Date;
+        tblApplicationVariable: IApplicationVariable[];
     }
     
     export class Application implements IApplication {
-        constructor(public ID: string, public Name: string, public Description: string, public URL: string,  public CreatedDate: Date) {          
+        constructor(public ID: string, public Name: string, public Description: string, public URL: string, public CreatedDate: Date, public tblApplicationVariable: IApplicationVariable[]) {          
         }
     }
 
