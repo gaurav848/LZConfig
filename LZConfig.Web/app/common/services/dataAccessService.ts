@@ -1,5 +1,7 @@
 ﻿namespace lzconfig.services {
 
+    const BASEURL = "http://localhost/LZConfig.Services/odata/";
+
     export interface IApplicationResource
         extends ng.resource.IResource<lzconfig.domain.IApplication> {
         //create(data: any): lzconfig.domain.IApplication;
@@ -25,6 +27,8 @@
 
         public performUpdate: boolean;
 
+      
+
         static $inject = ["$resource"];
         constructor(private $resource: ng.resource.IResourceService) {
             this.performUpdate = true;
@@ -33,33 +37,33 @@
         getApplicationResource(): ng.resource.IResourceClass<IApplicationResource> {
             const queryAction: ng.resource.IActionDescriptor = {
                 method: 'GET',
-                url: "http://localhost/LZConfig.Services/Applications",
+                url: BASEURL + "Applications",
                 isArray: false
             };
             //const getAction: ng.resource.IActionDescriptor = {
             //    method: 'GET',
-            //    url: "http://localhost/LZConfig.Services/Applications(:id)",
+            //    url: "http://localhost/LZConfig.Services/odata/Applications(:id)",
             //    params: { ID: "@ID" }
             //};
             const getAction: ng.resource.IActionDescriptor = {
                 method: 'GET',
-                url: "http://localhost/LZConfig.Services/Applications(:id)",
+                url: BASEURL + "Applications(:id)",
                 params: { $expand: "tblApplicationConnection,tblApplicationVariable"}
             };
             const createAction: ng.resource.IActionDescriptor = {
                 method: 'POST',
-                url: "http://localhost/LZConfig.Services/Applications(:ID)",
+                url: BASEURL + "Applications(:ID)",
                 params: { ID: "@ID" },
                 isArray: false
             };
             const updateAction: ng.resource.IActionDescriptor = {
                 method: 'PUT',
-                url: "http://localhost/LZConfig.Services/Applications(:ID)",
+                url: BASEURL + "Applications(:ID)",
                 params: { ID: "@ID" }
             };
             const deleteAction: ng.resource.IActionDescriptor = {
                 method: 'DELETE',
-                url: "http://localhost/LZConfig.Services/Applications(:ID)",
+                url: BASEURL + "Applications(:ID)",
                 params: { ID: "@ID" },
                 isArray: false
             };
@@ -72,7 +76,7 @@
 
             //angular.extend(this.$resource.prototype, 
 
-            return this.$resource("http://localhost/LZConfig.Services/Applications(:id)", null, {
+            return this.$resource(BASEURL + "Applications(:id)", null, {
                 query: queryAction,
                 get: getAction,
                 save: saveAction,
@@ -84,18 +88,18 @@
         getApplicationVariableResource(): ng.resource.IResourceClass<IApplicationVariableResource> {
             const createAction: ng.resource.IActionDescriptor = {
                 method: 'POST',
-                url: "http://localhost/LZConfig.Services/ApplicationVariables(ApplicationID=:ID,Name='" + ":Name'" + ")",
+                url: BASEURL + "ApplicationVariables(ApplicationID=:ID,Name='" + ":Name'" + ")",
                 params: { ID: "@ApplicationID", Name:"@Name" },
                 isArray: false
             };
             const updateAction: ng.resource.IActionDescriptor = {
                 method: 'PUT',
-                url: "http://localhost/LZConfig.Services/ApplicationVariables(ApplicationID=:ID,Name='" + ":Name'" + ")",
+                url: BASEURL + "ApplicationVariables(ApplicationID=:ID,Name='" + ":Name'" + ")",
                 params: { ID: "@ApplicationID", Name: "@Name"  }
             };
             const deleteAction: ng.resource.IActionDescriptor = {
                 method: 'DELETE',
-                url: "http://localhost/LZConfig.Services/ApplicationVariables(ApplicationID=:ID,Name='" + ":Name'" + ")",
+                url: BASEURL + "ApplicationVariables(ApplicationID=:ID,Name='" + ":Name'" + ")",
                 params: { ID: "@ApplicationID", Name: "@Name" },
                 isArray: false
             };
@@ -110,7 +114,7 @@
             saveAction = updateAction;
             //angular.extend(this.$resource.prototype, 
 
-            return this.$resource("http://localhost/LZConfig.Services/ApplicationVariables(ApplicationID=:ID,Name='" + ":Name'" + ")", null, {
+            return this.$resource(BASEURL + "ApplicationVariables(ApplicationID=:ID,Name='" + ":Name'" + ")", null, {
                 save: saveAction,
                 delete: deleteAction,
                 create: createAction

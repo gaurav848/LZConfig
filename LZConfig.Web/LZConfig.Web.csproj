@@ -973,7 +973,6 @@
     <TypeScriptCompile Include="app\app.ts" />
     <TypeScriptCompile Include="app\components\application\application.ts" />
     <TypeScriptCompile Include="app\components\application\applicationController.ts" />
-    <TypeScriptCompile Include="app\applications\applicationDetailController.ts" />
     <TypeScriptCompile Include="app\components\applications\applicationListController.ts" />
     <TypeScriptCompile Include="app\common\services\common.services.ts" />
     <TypeScriptCompile Include="app\common\services\dataAccessService.ts" />

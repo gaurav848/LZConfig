@@ -73,11 +73,11 @@
 
             this.title = "Application"
             this.tabs = [
-                { title: "Application", url: "LZConfig/app/components/application/applicationDetailView.html" },
-                { title: "Connection Strings", url: "LZConfig/app/components/connections/applicationConnectionsView.html" },
-                { title: "Application Variables", url: "LZConfig/app/components/variables/applicationVariablesView.html" }
+                { title: "Application", url: "app/components/application/applicationDetailView.html" },
+                { title: "Connection Strings", url: "app/components/connections/applicationConnectionsView.html" },
+                { title: "Application Variables", url: "app/components/variables/applicationVariablesView.html" }
             ];
-            this.currentTab = "LZConfig/app/components/application/applicationDetailView.html";
+            this.currentTab = "app/components/application/applicationDetailView.html";
 
             var applicationResource = dataAccessService.getApplicationResource();
 

@@ -38,7 +38,7 @@ namespace Lubrizol.LZConfig.Services.Web
 
             config.MapODataServiceRoute(
                 routeName:"ODataRoute",
-                routePrefix:null,
+                routePrefix:"odata",
                 model:builder.GetEdmModel()
                 );
         }
