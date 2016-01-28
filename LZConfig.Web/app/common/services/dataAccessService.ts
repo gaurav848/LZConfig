@@ -99,7 +99,7 @@
             };
             const deleteAction: ng.resource.IActionDescriptor = {
                 method: 'DELETE',
-                url: BASEURL + "ApplicationVariables(ApplicationID=:ID,Name='" + ":Name'" + ")",
+                url: BASEURL + "ApplicationVariables(ApplicationID=:ApplicationID,Name='" + ":Name'" + ")",
                 params: { ID: "@ApplicationID", Name: "@Name" },
                 isArray: false
             };
