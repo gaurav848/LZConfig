@@ -89,7 +89,8 @@ namespace Lubrizol.LZConfig.Services.Web.Controllers
         }
 
         // POST: odata/ApplicationVariables
-        public IHttpActionResult Post(tblApplicationVariable tblApplicationVariable)
+
+        public IHttpActionResult Post([FromBody] tblApplicationVariable tblApplicationVariable)
         {
             if (!ModelState.IsValid)
             {

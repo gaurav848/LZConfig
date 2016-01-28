@@ -53,18 +53,18 @@
             const createAction: ng.resource.IActionDescriptor = {
                 method: 'POST',
                 url: BASEURL + "Applications(:ID)",
-                params: { ID: "@ID" },
+                params: { ID: "@ApplicationID" },
                 isArray: false
             };
             const updateAction: ng.resource.IActionDescriptor = {
                 method: 'PUT',
                 url: BASEURL + "Applications(:ID)",
-                params: { ID: "@ID" }
+                params: { ID: "@ApplicationID" }
             };
             const deleteAction: ng.resource.IActionDescriptor = {
                 method: 'DELETE',
                 url: BASEURL + "Applications(:ID)",
-                params: { ID: "@ID" },
+                params: { ID: "@ApplicationID" },
                 isArray: false
             };
 
@@ -88,8 +88,8 @@
         getApplicationVariableResource(): ng.resource.IResourceClass<IApplicationVariableResource> {
             const createAction: ng.resource.IActionDescriptor = {
                 method: 'POST',
-                url: BASEURL + "ApplicationVariables(ApplicationID=:ID,Name='" + ":Name'" + ")",
-                params: { ID: "@ApplicationID", Name:"@Name" },
+                url: BASEURL + "ApplicationVariables",
+                params: null,
                 isArray: false
             };
             const updateAction: ng.resource.IActionDescriptor = {
@@ -111,7 +111,7 @@
             else
                 saveAction = createAction;
             
-            saveAction = updateAction;
+            saveAction = createAction;
             //angular.extend(this.$resource.prototype, 
 
             return this.$resource(BASEURL + "ApplicationVariables(ApplicationID=:ID,Name='" + ":Name'" + ")", null, {

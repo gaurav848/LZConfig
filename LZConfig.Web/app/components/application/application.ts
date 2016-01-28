@@ -1,7 +1,7 @@
 ﻿namespace lzconfig.domain {
     
     export interface IApplication {
-        ID: string;
+        ApplicationID: string;
         Name: string;
         URL: string;
         Description: string;
@@ -10,13 +10,12 @@
     }
     
     export class Application implements IApplication {
-        constructor(public ID: string, public Name: string, public Description: string, public URL: string, public CreatedDate: Date, public tblApplicationVariable: IApplicationVariable[]) {          
+        constructor(public ApplicationID: string, public Name: string, public Description: string, public URL: string, public CreatedDate: Date, public tblApplicationVariable: IApplicationVariable[]) {          
         }
     }
 
-
     export interface IApplicationVariable {
-        ID: string;
+        ApplicationID: string;
         Name: string;
         Value: string;
         Secure: boolean;
@@ -27,7 +26,7 @@
     }
 
     export class ApplicationVariable implements IApplicationVariable {
-        constructor(public ID: string,
+        constructor(public ApplicationID: string,
             public Name: string,
             public Value: string,
             public Secure: boolean,

@@ -1,5 +1,28 @@
 ﻿namespace lzconfig {
 
+    export interface IApplicationVariable {
+        ApplicationID: string;
+        Name: string;
+        Value: string;
+        Secure: boolean;
+        CreatedBy: string;
+        CreatedDate: Date;
+        ModifiedBy: string;
+        ModifiedDate: Date;
+    }
+
+    export class ApplicationVariable implements IApplicationVariable {
+        constructor(public ApplicationID: string,
+            public Name: string,
+            public Value: string,
+            public Secure: boolean,
+            public CreatedBy: string,
+            public CreatedDate: Date,
+            public ModifiedBy: string,
+            public ModifiedDate: Date) {
+        }
+    }
+
     interface IApplicationParams extends ng.route.IRouteParamsService {
         id: string;
     }
@@ -12,7 +35,7 @@
 
         application: lzconfig.domain.IApplication;
 
-        selected:lzconfig.domain.IApplicationVariable;
+        selected:IApplicationVariable;
 
         onClickTab(tab) {
             this.currentTab = tab.url;
@@ -40,7 +63,7 @@
             this.selected = angular.copy(variable);
         };
 
-        deleteVariable = function (variable: lzconfig.domain.IApplicationVariable) {
+        deleteVariable = function (variable: IApplicationVariable) {
             console.log("deleteVariable:" + JSON.stringify(variable));
             var applicationVariableResource = this.dataAccessService.getApplicationVariableResource();
             //this.dataAccessService.performUpdate = true;
@@ -52,19 +75,20 @@
 
         newVariable = function() {
             console.log("newVariable called");
-            var variable = new lzconfig.domain.ApplicationVariable(this.application.ID, null, null, null, null, null, null, null);
+            var variable:ApplicationVariable = new ApplicationVariable(this.application.ID, null, null, null, "user", new Date(), "user", new Date());
             console.log("newVariable:" + JSON.stringify(variable));
             this.application.tblApplicationVariable.push(variable);
+            this.selected = variable;
         }
         cancelEditVariable = function() {
             this.selected = null;
         }
 
-        saveVariable(variable: lzconfig.domain.IApplicationVariable) {
+        saveVariable(variable: IApplicationVariable) {
             console.log("saveVariable:" + JSON.stringify(variable));
 
             var applicationVariableResource = this.dataAccessService.getApplicationVariableResource();
-            this.dataAccessService.performUpdate = true;
+            this.dataAccessService.performUpdate = false;
             applicationVariableResource.save(variable)
                 .$promise
                 .then((data: any) => { console.log(data) })
