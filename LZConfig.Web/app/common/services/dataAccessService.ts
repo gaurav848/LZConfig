@@ -53,18 +53,18 @@
             const createAction: ng.resource.IActionDescriptor = {
                 method: 'POST',
                 url: BASEURL + "Applications(:ID)",
-                params: { ID: "@ID" },
+                params: { ID: "@ApplicationID" },
                 isArray: false
             };
             const updateAction: ng.resource.IActionDescriptor = {
                 method: 'PUT',
                 url: BASEURL + "Applications(:ID)",
-                params: { ID: "@ID" }
+                params: { ID: "@ApplicationID" }
             };
             const deleteAction: ng.resource.IActionDescriptor = {
                 method: 'DELETE',
                 url: BASEURL + "Applications(:ID)",
-                params: { ID: "@ID" },
+                params: { ID: "@ApplicationID" },
                 isArray: false
             };
 
@@ -99,8 +99,8 @@
             };
             const deleteAction: ng.resource.IActionDescriptor = {
                 method: 'DELETE',
-                url: BASEURL + "ApplicationVariables(ApplicationID=:AppId,Name='" + ":Name'" + ")",
-                params: { AppId: "@ApplicationID", Name: "@Name" },
+                url: BASEURL + "ApplicationVariables(ApplicationID=:ApplicationID,Name='" + ":Name'" + ")",
+                params: { ID: "@ApplicationID", Name: "@Name" },
                 isArray: false
             };
 
