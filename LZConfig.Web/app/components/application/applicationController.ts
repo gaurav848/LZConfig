@@ -136,6 +136,9 @@
         }
 
         editConnection(connection: IApplicationConnection) {
+
+            if (connection == null)
+                connection = new lzconfig.ApplicationConnection(this.application.ID, null, null, null, null, null, null, "user", new Date(), "user", new Date());
             var modalInstance = this.$uibModal.open({
                 animation: true,
                 templateUrl: 'app/components/connections/applicationConnectionView.html',

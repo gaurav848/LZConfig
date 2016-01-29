@@ -30,13 +30,12 @@
             </div>
         </div>
 
-        <div class="form-group"
-             ng-class="{'has-error': vm.application.Name.$invalid}">
+        <div class="form-group">
             <label class="col-lg-4 control-label">Connection Template</label>
             <div class="col-lg-8">
                 <select
                     class="form-control"
-                    ng-model="vm.connectionType"
+                    ng-model="vm.connectionTypeId"
                     ng-required="false"
                     ng-change="vm.connectionTypeChange()">
                         <option ng-repeat="option in vm.connectionTypes" value="{{option.ID}}" >{{option.Name}}</option>
@@ -114,13 +113,13 @@
         </div>
 
         <div class="form-group"
-             ng-class="{'has-error': vm.connection.Password.$invalid}">
+             ng-class="{'has-error': vm.verifyPAssword.$invalid}">
             <label class="col-lg-4 control-label">Password (verify)</label>
             <div class="col-lg-8">
                 <input type="password"
                        name="title"
                        class="form-control"
-                       ng-model="vm.connection.Password"
+                       ng-model="vm.verifyPassword"
                        ng-required="false"
                        ng-minlength="3"
                        ng-maxlength="20" />
