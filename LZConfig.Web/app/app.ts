@@ -1,7 +1,7 @@
 ﻿namespace lzconfig
 {
     var main = angular.module("LZConfig",
-        ["ngRoute", "common.services"]);
+        ["ngRoute","ui.bootstrap", "common.services"]);
 
     main.config(($httpProvider) => {
         $httpProvider.defaults.withCredentials = true;

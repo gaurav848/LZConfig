@@ -12,6 +12,10 @@
         //create(data: any): lzconfig.domain.IApplication;
     }
 
+    export interface IConnectionTypeResource
+        extends ng.resource.IResource<lzconfig.domain.IConnectionType> {
+    }
+
     export interface ICustomApplicationResource extends ng.resource.IResourceClass<IApplicationResource> {
     }
 
@@ -19,6 +23,7 @@
             
         getApplicationResource(): ng.resource.IResourceClass<IApplicationResource>;
         getApplicationVariableResource(): ng.resource.IResourceClass<IApplicationVariableResource>;
+        getConnectionTypeResource(): ng.resource.IResourceClass<IConnectionTypeResource>;
         performUpdate: boolean;
     }
 
@@ -53,18 +58,18 @@
             const createAction: ng.resource.IActionDescriptor = {
                 method: 'POST',
                 url: BASEURL + "Applications(:ID)",
-                params: { ID: "@ApplicationID" },
+                params: { ID: "@ID" },
                 isArray: false
             };
             const updateAction: ng.resource.IActionDescriptor = {
                 method: 'PUT',
                 url: BASEURL + "Applications(:ID)",
-                params: { ID: "@ApplicationID" }
+                params: { ID: "@ID" }
             };
             const deleteAction: ng.resource.IActionDescriptor = {
                 method: 'DELETE',
                 url: BASEURL + "Applications(:ID)",
-                params: { ID: "@ApplicationID" },
+                params: { ID: "@ID" },
                 isArray: false
             };
 
@@ -118,6 +123,18 @@
                 save: saveAction,
                 delete: deleteAction,
                 create: createAction
+            });
+        }
+
+        getConnectionTypeResource(): ng.resource.IResourceClass<IConnectionTypeResource> {
+            const queryAction: ng.resource.IActionDescriptor = {
+                method: 'GET',
+                url: BASEURL + "ConnectionTypes",
+                isArray: false
+            };
+
+            return this.$resource(BASEURL + "ConnectionTypes(:id)", null, {
+                query: queryAction
             });
         }
     }

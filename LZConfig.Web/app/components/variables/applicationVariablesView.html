@@ -12,8 +12,8 @@
         <tr ng-repeat="var in vm.application.tblApplicationVariable" ng-include="vm.getTemplate(var)"></tr>
         </tbody>
     </table>
-    <button ng-click="vm.newVariable()" class="btn btn-primary">New Variable</button>
-    <button ng-click="vm.newSecureVariable()" class="btn btn-primary">New Secure Variable</button>
+    <button ng-click="vm.newVariable('text')" class="btn btn-primary">New Variable</button>
+    <button ng-click="vm.newVariable('password')" class="btn btn-primary">New Secure Variable</button>
 
     <script type="text/ng-template" id="display">
         <td>{{var.Name}}</td>
@@ -22,16 +22,16 @@
         <td>{{var.ModifiedDate | date:'yyyy-MMM-dd'}}</td>
         <td>
             <button ng-click="vm.editVariable(var)"><!--<img src="/CommonEnterprise/images/editdelete.gif" />--> edit</button>
-            <button ng-click="vm.deleteVariable(var)"><!--<img src="/CommonEnterprise/images/editdelete.gif" />-->delete</button>
+            <button ng-click="vm.deleteVariable($index)"><!--<img src="/CommonEnterprise/images/editdelete.gif" />-->delete</button>
         </td>
     </script>
 
     <script type="text/ng-template" id="edit">
         <td><input type="text" ng-model="var.Name" /></td>
-        <td><input type="text" ng-model="var.Value" /></td>
+        <td><input type={{vm.variableType}} ng-model="var.Value" /></td>
         <td>
             <button ng-click="vm.saveVariable(var)">Save</button>
-            <button ng-click="vm.cancelEditVariable()">Cancel</button>
+            <button ng-click="vm.cancelEditVariable($index)">Cancel</button>
         </td>
     </script>
 </div>

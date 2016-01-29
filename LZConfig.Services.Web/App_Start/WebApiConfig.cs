@@ -32,6 +32,7 @@ namespace Lubrizol.LZConfig.Services.Web
             var applications = builder.EntitySet<tblApplication>("Applications");
             builder.EntitySet<tblApplicationConnection>("ApplicationConnections");
             builder.EntitySet<tblApplicationVariable>("ApplicationVariables");
+            builder.EntitySet<tblConnectionType>("ConnectionTypes");
 
             applications.EntityType.HasMany(x => x.tblApplicationConnection);
             applications.EntityType.HasMany(x => x.tblApplicationVariable);
