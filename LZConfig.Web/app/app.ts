@@ -20,7 +20,7 @@
                 controller: "ApplicationListController",
                 controllerAs: "vm"
             })
-            .when("/application/:id",
+            .when("/application/:ID",
             {
                 templateUrl: "app/components/application/applicationView.html",
                 controller: "ApplicationController",

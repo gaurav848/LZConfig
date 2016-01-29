@@ -24,7 +24,7 @@
     }
 
     interface IApplicationParams extends ng.route.IRouteParamsService {
-        id: string;
+        ID: string;
     }
 
     class ApplicationController {
@@ -111,7 +111,7 @@
 
             var applicationResource = dataAccessService.getApplicationResource();
 
-            applicationResource.get({ id: $routeParams.id },
+            applicationResource.get({ id: $routeParams.ID },
                 (data: lzconfig.domain.IApplication) => {
                     this.application = data;
                 }
