@@ -1,58 +1,5 @@
 ﻿namespace lzconfig {
 
-    export interface IApplicationVariable {
-        ApplicationID: string;
-        Name: string;
-        Value: string;
-        Secure: boolean;
-        CreatedBy: string;
-        CreatedDate: Date;
-        ModifiedBy: string;
-        ModifiedDate: Date;
-    }
-
-    export class ApplicationVariable implements IApplicationVariable {
-        constructor(public ApplicationID: string,
-            public Name: string,
-            public Value: string,
-            public Secure: boolean,
-            public CreatedBy: string,
-            public CreatedDate: Date,
-            public ModifiedBy: string,
-            public ModifiedDate: Date) {
-        }
-    }
-
-    export interface IApplicationConnection {
-        ApplicationID: string;
-        Name: string;
-        ConnectionString: string;
-        VirtualConnectionString: boolean;
-        Password: string;
-        CommandTimeout: number;
-        ProviderName: string;
-        CreatedBy: string;
-        CreatedDate: Date;
-        ModifiedBy: string;
-        ModifiedDate: Date;
-    }
-
-    export class ApplicationConnection implements IApplicationConnection {
-
-        constructor(public ApplicationID: string,
-            public Name: string,
-            public ConnectionString: string,
-            public VirtualConnectionString: boolean,
-            public Password: string,
-            public CommandTimeout: number,
-            public ProviderName: string,
-            public CreatedBy: string,
-            public CreatedDate: Date,
-            public ModifiedBy: string,
-            public ModifiedDate: Date) {
-        }
-    }
-
     interface IApplicationParams extends ng.route.IRouteParamsService {
         ID: string;
     }
@@ -67,7 +14,7 @@
 
         variableType:string;
 
-        selectedVariable:IApplicationVariable;
+        selectedVariable:lzconfig.domain.IApplicationVariable;
 
         onClickTab(tab) {
             this.currentTab = tab.url;
@@ -112,7 +59,7 @@
             console.log("newVariable called");
             this.variableType = inputType;
             var user = "user";
-            var variable:lzconfig.ApplicationVariable = new lzconfig.ApplicationVariable(this.application.ID, null, null, null, user, new Date(), user, new Date());
+            var variable:lzconfig.domain.ApplicationVariable = new lzconfig.domain.ApplicationVariable(this.application.ID, null, null, null, user, new Date(), user, new Date());
             console.log("newVariable:" + JSON.stringify(variable));
             this.application.tblApplicationVariable.push(variable);
             this.selectedVariable = variable;
@@ -123,7 +70,7 @@
             this.selected = null;
         }
 
-        saveVariable(variable: IApplicationVariable) {
+        saveVariable(variable: lzconfig.domain.IApplicationVariable) {
             console.log("saveVariable:" + JSON.stringify(variable));
 
             var applicationVariableResource = this.dataAccessService.getApplicationVariableResource();
@@ -135,10 +82,10 @@
 
         }
 
-        editConnection(connection: IApplicationConnection) {
+        editConnection(connection: lzconfig.domain.IApplicationConnection) {
 
             if (connection == null)
-                connection = new lzconfig.ApplicationConnection(this.application.ID, null, null, null, null, null, null, "user", new Date(), "user", new Date());
+                connection = new lzconfig.domain.ApplicationConnection(this.application.ID, null, null, null, null, null, null, "user", new Date(), "user", new Date());
             var modalInstance = this.$uibModal.open({
                 animation: true,
                 templateUrl: 'app/components/connections/applicationConnectionView.html',
