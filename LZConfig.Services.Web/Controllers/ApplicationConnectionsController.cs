@@ -40,13 +40,17 @@ namespace Lubrizol.LZConfig.Services.Web.Controllers
 
         // GET: odata/ApplicationConnections(5)
         [EnableQuery]
-        public SingleResult<tblApplicationConnection> GettblApplicationConnection([FromODataUri] Guid key)
+        [ODataRoute("ApplicationConnections(ApplicationID={applicationId},Name={name})")]
+        public SingleResult<tblApplicationConnection> GettblApplicationConnection([FromODataUri] Guid applicationId, [FromODataUri] string name)
         {
-            return SingleResult.Create(db.tblApplicationConnection.Where(tblApplicationConnection => tblApplicationConnection.ApplicationID == key));
+            var connections= db.tblApplicationConnection
+                 .Where(x => x.ApplicationID == applicationId)
+                 .Where(x => x.Name == name);
+            return SingleResult.Create(connections);
         }
 
-        // PUT: odata/ApplicationConnections(5)
-        public IHttpActionResult Put([FromODataUri] Guid key, Delta<tblApplicationConnection> patch)
+        [ODataRoute("ApplicationConnections(ApplicationID={applicationId},Name={name})")]
+        public IHttpActionResult Put([FromODataUri] Guid applicationId, [FromODataUri] string name, Delta<tblApplicationConnection> patch)
         {
             Validate(patch.GetEntity());
 
@@ -55,11 +59,13 @@ namespace Lubrizol.LZConfig.Services.Web.Controllers
                 return BadRequest(ModelState);
             }
 
-            tblApplicationConnection tblApplicationConnection = db.tblApplicationConnection.Find(key);
+            tblApplicationConnection tblApplicationConnection = db.tblApplicationConnection.Find(new object[] { applicationId, name });
             if (tblApplicationConnection == null)
             {
                 return NotFound();
             }
+
+            patch.GetEntity().ModifiedDate = DateTime.Now;
 
             patch.Put(tblApplicationConnection);
 
@@ -69,7 +75,7 @@ namespace Lubrizol.LZConfig.Services.Web.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!tblApplicationConnectionExists(key))
+                if (!tblApplicationConnectionExists(applicationId, name))
                 {
                     return NotFound();
                 }
@@ -98,7 +104,7 @@ namespace Lubrizol.LZConfig.Services.Web.Controllers
             }
             catch (DbUpdateException)
             {
-                if (tblApplicationConnectionExists(tblApplicationConnection.ApplicationID))
+                if (tblApplicationConnectionExists(tblApplicationConnection.ApplicationID, tblApplicationConnection.Name))
                 {
                     return Conflict();
                 }
@@ -113,7 +119,8 @@ namespace Lubrizol.LZConfig.Services.Web.Controllers
 
         // PATCH: odata/ApplicationConnections(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public IHttpActionResult Patch([FromODataUri] Guid key, Delta<tblApplicationConnection> patch)
+        [ODataRoute("ApplicationConnections(ApplicationID={applicationId},Name={name})")]
+        public IHttpActionResult Patch([FromODataUri] Guid applicationId, [FromODataUri] string name, Delta<tblApplicationConnection> patch)
         {
             Validate(patch.GetEntity());
 
@@ -122,7 +129,7 @@ namespace Lubrizol.LZConfig.Services.Web.Controllers
                 return BadRequest(ModelState);
             }
 
-            tblApplicationConnection tblApplicationConnection = db.tblApplicationConnection.Find(key);
+            tblApplicationConnection tblApplicationConnection = db.tblApplicationConnection.Find(applicationId, name);
             if (tblApplicationConnection == null)
             {
                 return NotFound();
@@ -136,7 +143,7 @@ namespace Lubrizol.LZConfig.Services.Web.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!tblApplicationConnectionExists(key))
+                if (!tblApplicationConnectionExists(applicationId, name))
                 {
                     return NotFound();
                 }
@@ -180,9 +187,9 @@ namespace Lubrizol.LZConfig.Services.Web.Controllers
             base.Dispose(disposing);
         }
 
-        private bool tblApplicationConnectionExists(Guid key)
+        private bool tblApplicationConnectionExists(Guid applicationId, string name)
         {
-            return db.tblApplicationConnection.Count(e => e.ApplicationID == key) > 0;
+            return db.tblApplicationConnection.Count(e => e.ApplicationID == applicationId && e.Name == name) > 0;
         }
     }
 }

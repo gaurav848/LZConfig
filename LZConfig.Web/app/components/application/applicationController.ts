@@ -5,6 +5,7 @@
     }
 
     class ApplicationController {
+        
         title: string;
 
         tabs: any[];
@@ -38,11 +39,35 @@
             else return 'display';
         }
 
+        saveApplication() {
+            console.log("saveApplication:" + JSON.stringify(this.application));
+            var applicationResource = this.dataAccessService.getApplicationResource();
+
+            var applicationToSave: lzconfig.domain.Application = new lzconfig.domain.Application(this.application.ID, this.application.Name, this.application.Description, this.application.URL, this.application.CreatedBy, this.application.CreatedDate, "user", new Date());
+            applicationResource.save(applicationToSave);
+            this.getApplication();
+        }
+
+        deleteApplication() {
+            if (!confirm("Are you sure you want to delte the appliction?"))
+                return;
+            console.log("deleteApplication:" + JSON.stringify(this.application));
+            var applicationResource = this.dataAccessService.getApplicationResource();
+            applicationResource.delete({ID: this.application.ID});
+        }
+
+        cancelApplication() {
+            this.$location.path("/applicationList");
+        }
+
         editVariable = function (variable) {
             this.selected = angular.copy(variable);
         };
 
         deleteVariable = function (index: number) {
+            if (!confirm("Are you sure you want to delte the variable?"))
+                return;
+
             var variable = this.application.tblApplicationVariable[index];
             console.log("deleteVariable:" + JSON.stringify(variable));
             var applicationVariableResource = this.dataAccessService.getApplicationVariableResource();
@@ -79,7 +104,6 @@
                 .$promise
                 .then((data: any) => { console.log(data) })
                 .catch((response) => { console.log(response) });
-
         }
 
         editConnection(connection: lzconfig.domain.IApplicationConnection) {
@@ -97,6 +121,14 @@
 
         }
 
+        private getApplication() {
+            var applicationResource = this.dataAccessService.getApplicationResource();
+            applicationResource.get({ id: this.$routeParams.ID  },
+                (data: lzconfig.domain.IApplication) => {
+                    this.application = data;
+                }
+            );
+        }
         static $inject = ["$routeParams", "dataAccessService", "$location", "$uibModal", "$rootScope"];
         constructor(private $routeParams: IApplicationParams,
             private dataAccessService: lzconfig.services.DataAccessService,
@@ -111,14 +143,7 @@
                 { title: "Application Variables", url: "app/components/variables/applicationVariablesView.html" }
             ];
             this.currentTab = "app/components/application/applicationDetailView.html";
-
-            var applicationResource = dataAccessService.getApplicationResource();
-
-            applicationResource.get({ id: $routeParams.ID },
-                (data: lzconfig.domain.IApplication) => {
-                    this.application = data;
-                }
-            );
+            this.getApplication();
         }
 
     }

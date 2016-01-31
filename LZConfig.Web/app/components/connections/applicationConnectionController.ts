@@ -27,11 +27,19 @@
             this.connection.ProviderName = connectionType.ProviderName;
         }
 
-        save(connection) {
-            console.log("save called");
-            if (connection.Password != "" && connection.Password != this.verifyPassword)
+        saveConnection() {
+            console.log("saveConnection:" + JSON.stringify(this.connection));
+            if (this.connection.Password != "" && this.connection.Password != this.verifyPassword)
                 console.log("passwords set but do not verify");
+            
+            var applicationConnectionResource = this.dataAccessService.getApplicationConnectionResource();
+            this.dataAccessService.performUpdate = false;
+            applicationConnectionResource.save(this.connection)
+                .$promise
+                .then((data: any) => { console.log(data) })
+                .catch((response) => { console.log(response) });
         }
+
         cancel() {
             this.$uibModalInstance.dismiss("cancel");
         }

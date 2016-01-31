@@ -9,7 +9,10 @@
 
     export interface IApplicationVariableResource
         extends ng.resource.IResource<lzconfig.domain.IApplicationVariable> {
-        //create(data: any): lzconfig.domain.IApplication;
+    }
+
+    export interface IApplicationConnectionResource
+        extends ng.resource.IResource<lzconfig.domain.IApplicationConnection> {
     }
 
     export interface IConnectionTypeResource
@@ -23,6 +26,7 @@
             
         getApplicationResource(): ng.resource.IResourceClass<IApplicationResource>;
         getApplicationVariableResource(): ng.resource.IResourceClass<IApplicationVariableResource>;
+        getApplicationConnectionResource(): ng.resource.IResourceClass<IApplicationConnectionResource>;
         getConnectionTypeResource(): ng.resource.IResourceClass<IConnectionTypeResource>;
         performUpdate: boolean;
     }
@@ -126,6 +130,32 @@
             });
         }
 
+        getApplicationConnectionResource(): ng.resource.IResourceClass<IApplicationConnectionResource> {
+            const createAction: ng.resource.IActionDescriptor = {
+                method: 'POST',
+                url: BASEURL + "ApplicationConnections",
+                params: null,
+                isArray: false
+            };
+            const updateAction: ng.resource.IActionDescriptor = {
+                method: 'PUT',
+                url: BASEURL + "ApplicationConnections(ApplicationID=:ID,Name='" + ":Name'" + ")",
+                params: { ID: "@ApplicationID", Name: "@Name" }
+            };
+            const deleteAction: ng.resource.IActionDescriptor = {
+                method: 'DELETE',
+                url: BASEURL + "ApplicationConnections(ApplicationID=:ApplicationID,Name='" + ":Name'" + ")",
+                params: { ID: "@ApplicationID", Name: "@Name" },
+                isArray: false
+            };
+
+            return this.$resource(BASEURL + "ApplicationConnections(ApplicationID=:ID,Name='" + ":Name'" + ")", null, {
+                save: updateAction,
+                delete: deleteAction,
+                create: createAction
+            });
+
+        }
         getConnectionTypeResource(): ng.resource.IResourceClass<IConnectionTypeResource> {
             const queryAction: ng.resource.IActionDescriptor = {
                 method: 'GET',

@@ -43,10 +43,10 @@ namespace Lubrizol.LZConfig.Services.Web.Controllers
         [ODataRoute("ApplicationVariables(ApplicationID={applicationId},Name={name})")]
         public SingleResult<tblApplicationVariable> GettblApplicationVariable([FromODataUri] Guid applicationId, [FromODataUri] string name)
         {
-            var variable = db.tblApplicationVariable
+            var variables = db.tblApplicationVariable
                 .Where(tblApplicationVariable => tblApplicationVariable.ApplicationID == applicationId)
                 .Where(tblApplicationVariable => tblApplicationVariable.Name == name);
-            return SingleResult.Create(variable);
+            return SingleResult.Create(variables);
         }
 
         // PUT: odata/ApplicationVariables(5)

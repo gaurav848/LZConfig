@@ -5,12 +5,22 @@
         Name: string;
         URL: string;
         Description: string;
+        CreatedBy: string;
         CreatedDate: Date;
-        tblApplicationVariable: IApplicationVariable[];
+        ModifiedBy: string;
+        ModifiedDate: Date;
     }
     
     export class Application implements IApplication {
-        constructor(public ID: string, public Name: string, public Description: string, public URL: string, public CreatedDate: Date, public tblApplicationVariable: IApplicationVariable[]) {          
+        constructor(
+            public ID: string,
+            public Name: string,
+            public Description: string,
+            public URL: string,
+            public CreatedBy: string,
+            public CreatedDate: Date,
+            public ModifiedBy: string,
+            public ModifiedDate: Date) {          
         }
     }
 
