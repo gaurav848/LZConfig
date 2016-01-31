@@ -149,10 +149,17 @@
                 isArray: false
             };
 
+            var saveAction: ng.resource.IActionDescriptor;
+            if (this.performUpdate)
+                saveAction = updateAction;
+            else
+                saveAction = createAction;
+            
+            saveAction = createAction;
+            console.log("performUpdate:" + this.performUpdate);
             return this.$resource(BASEURL + "ApplicationConnections(ApplicationID=:ID,Name='" + ":Name'" + ")", null, {
-                save: updateAction,
-                delete: deleteAction,
-                create: createAction
+                save: saveAction,
+                delete: deleteAction
             });
 
         }

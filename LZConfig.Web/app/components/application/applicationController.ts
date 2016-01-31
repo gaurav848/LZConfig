@@ -109,16 +109,15 @@
         editConnection(connection: lzconfig.domain.IApplicationConnection) {
 
             if (connection == null)
-                connection = new lzconfig.domain.ApplicationConnection(this.application.ID, null, null, null, null, null, null, "user", new Date(), "user", new Date());
+                connection = new lzconfig.domain.ApplicationConnection(this.application.ID, null, null, null, null, null, null, "new", new Date(), "user", new Date());
             var modalInstance = this.$uibModal.open({
                 animation: true,
                 templateUrl: 'app/components/connections/applicationConnectionView.html',
                 controller: 'ApplicationConnectionController',
-                controllerAs:'vm',
+                controllerAs: 'vm',
                 size: null,
-                resolve: {connection: connection}
-            });
-
+                resolve: { connection: connection }
+            }).result.then(() => { this.getApplication()});
         }
 
         private getApplication() {

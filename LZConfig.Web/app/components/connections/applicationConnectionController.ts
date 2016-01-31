@@ -33,11 +33,15 @@
                 console.log("passwords set but do not verify");
             
             var applicationConnectionResource = this.dataAccessService.getApplicationConnectionResource();
+            this.dataAccessService.performUpdate = this.connection.CreatedBy != "new";
             this.dataAccessService.performUpdate = false;
             applicationConnectionResource.save(this.connection)
                 .$promise
-                .then((data: any) => { console.log(data) })
+                .then((data: any) => {
+                    console.log(data); this.$uibModalInstance.close(); })
                 .catch((response) => { console.log(response) });
+
+
         }
 
         cancel() {
