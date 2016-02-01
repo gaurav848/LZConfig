@@ -157,9 +157,10 @@ namespace Lubrizol.LZConfig.Services.Web.Controllers
         }
 
         // DELETE: odata/ApplicationConnections(5)
-        public IHttpActionResult Delete([FromODataUri] Guid key)
+        [ODataRoute("ApplicationConnections(ApplicationID={applicationId},Name={name})")]
+        public IHttpActionResult Delete([FromODataUri] Guid applicationId, [FromODataUri] string name)
         {
-            tblApplicationConnection tblApplicationConnection = db.tblApplicationConnection.Find(key);
+            tblApplicationConnection tblApplicationConnection = db.tblApplicationConnection.Find(applicationId, name);
             if (tblApplicationConnection == null)
             {
                 return NotFound();

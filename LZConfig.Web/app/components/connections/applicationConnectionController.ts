@@ -35,6 +35,7 @@
             var applicationConnectionResource = this.dataAccessService.getApplicationConnectionResource();
             this.dataAccessService.performUpdate = this.connection.CreatedBy != "new";
             this.dataAccessService.performUpdate = false;
+            this.connection.VirtualConnectionString = this.connection.ConnectionString;
             applicationConnectionResource.save(this.connection)
                 .$promise
                 .then((data: any) => {

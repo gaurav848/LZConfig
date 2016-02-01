@@ -120,6 +120,23 @@
             }).result.then(() => { this.getApplication()});
         }
 
+        deleteConnection(index: number) {
+            if (!confirm("Are you sure you want to delte the connection?"))
+                return;
+
+            var connection = this.application.tblApplicationConnection[index];
+            console.log("deleteConnection" + JSON.stringify(connection));
+            var applicationConnectionResource = this.dataAccessService.getApplicationConnectionResource();
+            //this.dataAccessService.performUpdate = true;
+            applicationConnectionResource.delete(connection)
+                .$promise
+                .then((data: any) => {
+                    console.log(data);
+                    this.application.tblApplicationConnection.splice(index, 1);
+                })
+                .catch((response) => { console.log(response) });
+        };
+
         private getApplication() {
             var applicationResource = this.dataAccessService.getApplicationResource();
             applicationResource.get({ id: this.$routeParams.ID  },
