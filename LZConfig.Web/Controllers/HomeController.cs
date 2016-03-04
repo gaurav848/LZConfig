@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace LZConfig.Web.Controllers
+namespace Lubrizol.LZConfig.Web.Controllers
 {
     public class HomeController : Controller
     {

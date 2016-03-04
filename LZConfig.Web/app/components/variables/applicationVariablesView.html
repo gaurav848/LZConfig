@@ -2,6 +2,7 @@
     <table class="table">
         <thead>
         <tr>
+            <td></td>
             <td>Variable Name</td>
             <td>Variable Value</td>
             <td>Modified By</td>
@@ -16,14 +17,14 @@
     <button ng-click="vm.newVariable('password')" class="btn btn-primary">New Secure Variable</button>
 
     <script type="text/ng-template" id="display">
+        <td>
+            <button ng-click="vm.editVariable(var)"><img src="/CommonEnterprise/images/edit.gif" /></button>
+            <button ng-click="vm.deleteVariable($index)"><img src="/CommonEnterprise/images/delete.gif" /></button>
+        </td>
         <td>{{var.Name}}</td>
         <td>{{var.Value}}</td>
         <td>{{var.ModifiedBy}}</td>
         <td>{{var.ModifiedDate | date:'yyyy-MMM-dd'}}</td>
-        <td>
-            <button ng-click="vm.editVariable(var)"><!--<img src="/CommonEnterprise/images/editdelete.gif" />--> edit</button>
-            <button ng-click="vm.deleteVariable($index)"><!--<img src="/CommonEnterprise/images/editdelete.gif" />-->delete</button>
-        </td>
     </script>
 
     <script type="text/ng-template" id="edit">

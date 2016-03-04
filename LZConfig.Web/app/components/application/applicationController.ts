@@ -43,7 +43,7 @@
             console.log("saveApplication:" + JSON.stringify(this.application));
             var applicationResource = this.dataAccessService.getApplicationResource();
 
-            var applicationToSave: lzconfig.domain.Application = new lzconfig.domain.Application(this.application.ID, this.application.Name, this.application.Description, this.application.URL, this.application.CreatedBy, this.application.CreatedDate, "user", new Date());
+            var applicationToSave: lzconfig.domain.ApplicationVM = new lzconfig.domain.ApplicationVM(this.application.ID, this.application.Name, this.application.Description, this.application.URL, this.application.CreatedBy, this.application.CreatedDate, "user", new Date());
             applicationResource.save(applicationToSave);
             this.getApplication();
         }
@@ -61,6 +61,7 @@
         }
 
         editVariable = function (variable) {
+            console.log("editVariable:" + JSON.stringify(variable));
             this.selected = angular.copy(variable);
         };
 

@@ -22,7 +22,7 @@
         connectionTypeChange() {
             console.log("connectionTypeChange called");
             console.log(this.connectionTypeId);
-            var connectionType = this.connectionTypes.filter(x=> x.ID == this.connectionTypeId)[0];
+            var connectionType = this.connectionTypes.filter(x=> x.ID === this.connectionTypeId)[0];
             this.connection.ConnectionString = connectionType.DefaultConnectionString;
             this.connection.ProviderName = connectionType.ProviderName;
         }

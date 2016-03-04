@@ -9,6 +9,8 @@
         CreatedDate: Date;
         ModifiedBy: string;
         ModifiedDate: Date;
+        tblApplicationConnection: IApplicationConnection[];
+        tblApplicationVariable: IApplicationVariable[];
     }
     
     export class Application implements IApplication {
@@ -20,9 +22,35 @@
             public CreatedBy: string,
             public CreatedDate: Date,
             public ModifiedBy: string,
-            public ModifiedDate: Date) {          
+            public ModifiedDate: Date,
+            public tblApplicationConnection: IApplicationConnection[],
+            public tblApplicationVariable: IApplicationVariable[]        ) {
         }
     }
+
+    export interface IApplicationVM {
+        ID: string;
+        Name: string;
+        URL: string;
+        Description: string;
+        CreatedBy: string;
+        CreatedDate: Date;
+        ModifiedBy: string;
+        ModifiedDate: Date;
+    }
+
+    export class ApplicationVM implements IApplicationVM {
+        constructor(
+            public ID: string,
+            public Name: string,
+            public Description: string,
+            public URL: string,
+            public CreatedBy: string,
+            public CreatedDate: Date,
+            public ModifiedBy: string,
+            public ModifiedDate: Date){
+        }
+}
 
     export interface IApplicationVariable {
         ApplicationID: string;
