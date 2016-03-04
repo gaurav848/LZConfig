@@ -1,13 +1,13 @@
 ﻿namespace lzconfig {
     export interface IApplicationListController {
         title: string;
-        applications: lzconfig.domain.IApplication[];
+        applications: lzconfig.IApplication[];
     }
 
     export class ApplicationListController implements IApplicationListController {
         title: string;    
 
-        applications: lzconfig.domain.IApplication[];
+        applications: lzconfig.IApplication[];
 
         static $inject = ["dataAccessService"];
         constructor(private dataAccessService: lzconfig.services.DataAccessService) {

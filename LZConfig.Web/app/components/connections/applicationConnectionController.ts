@@ -2,7 +2,7 @@
 
     class ApplicationConnectionController {
 
-        connectionTypes: lzconfig.domain.IConnectionType[];
+        connectionTypes: lzconfig.IConnectionType[];
         connectionTypeId: string;
         verifyPassword: string;
 

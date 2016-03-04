@@ -1,4 +1,4 @@
-﻿namespace lzconfig.domain {
+﻿namespace lzconfig {
     
     export interface IApplication {
         ID: string;

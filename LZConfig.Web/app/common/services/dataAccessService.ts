@@ -3,20 +3,20 @@
     const BASEURL = "http://localhost/LZConfig.Services/odata/";
 
     export interface IApplicationResource
-        extends ng.resource.IResource<lzconfig.domain.IApplication> {
+        extends ng.resource.IResource<lzconfig.IApplication> {
         //create(data: any): lzconfig.domain.IApplication;
     }
 
     export interface IApplicationVariableResource
-        extends ng.resource.IResource<lzconfig.domain.IApplicationVariable> {
+        extends ng.resource.IResource<lzconfig.IApplicationVariable> {
     }
 
     export interface IApplicationConnectionResource
-        extends ng.resource.IResource<lzconfig.domain.IApplicationConnection> {
+        extends ng.resource.IResource<lzconfig.IApplicationConnection> {
     }
 
     export interface IConnectionTypeResource
-        extends ng.resource.IResource<lzconfig.domain.IConnectionType> {
+        extends ng.resource.IResource<lzconfig.IConnectionType> {
     }
 
     export interface ICustomApplicationResource extends ng.resource.IResourceClass<IApplicationResource> {

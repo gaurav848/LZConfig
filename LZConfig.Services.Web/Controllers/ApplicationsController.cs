@@ -45,7 +45,8 @@ namespace Lubrizol.LZConfig.Services.Web.Controllers
         [EnableQuery]
         public SingleResult<tblApplication> GettblApplication([FromODataUri] Guid key)
         {
-            return SingleResult.Create(db.tblApplication.Where(tblApplication => tblApplication.ID == key));
+            var result = db.tblApplication.Where(tblApplication => tblApplication.ID == key);
+            return SingleResult.Create(result);
         }
 
         // PUT: odata/Applications(5)
