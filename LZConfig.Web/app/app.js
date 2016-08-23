@@ -21,3 +21,4 @@ var lzconfig;
             .otherwise("/applicationList");
     }
 })(lzconfig || (lzconfig = {}));
+//# sourceMappingURL=app.js.map

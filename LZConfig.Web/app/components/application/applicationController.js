@@ -146,3 +146,4 @@ var lzconfig;
         .module("LZConfig")
         .controller("ApplicationController", ApplicationController);
 })(lzconfig || (lzconfig = {}));
+//# sourceMappingURL=applicationController.js.map
