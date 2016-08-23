@@ -31,10 +31,12 @@
             console.log("saveConnection:" + JSON.stringify(this.connection));
             if (this.connection.Password != "" && this.connection.Password != this.verifyPassword)
                 console.log("passwords set but do not verify");
-            
+            this.dataAccessService.performUpdate = !(this.connection.CreatedDate == null);
             var applicationConnectionResource = this.dataAccessService.getApplicationConnectionResource();
-            this.dataAccessService.performUpdate = this.connection.CreatedBy != "new";
-            this.dataAccessService.performUpdate = false;
+            if (this.connection.CreatedDate == null)
+                this.connection.CreatedDate = new Date();
+            if (this.connection.ModifiedDate == null)
+                this.connection.ModifiedDate = new Date();
             this.connection.VirtualConnectionString = this.connection.ConnectionString;
             applicationConnectionResource.save(this.connection)
                 .$promise

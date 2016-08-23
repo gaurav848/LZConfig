@@ -34,9 +34,7 @@
     export class DataAccessService
         implements IDataAccessService {
 
-        public performUpdate: boolean;
-
-      
+        public performUpdate: boolean;   
 
         static $inject = ["$resource"];
         constructor(private $resource: ng.resource.IResourceService) {
@@ -120,7 +118,7 @@
             else
                 saveAction = createAction;
             
-            saveAction = createAction;
+            //saveAction = createAction;
             //angular.extend(this.$resource.prototype, 
 
             return this.$resource(BASEURL + "ApplicationVariables(ApplicationID=:ID,Name='" + ":Name'" + ")", null, {
@@ -155,7 +153,6 @@
             else
                 saveAction = createAction;
             
-            saveAction = createAction;
             console.log("performUpdate:" + this.performUpdate);
             return this.$resource(BASEURL + "ApplicationConnections(ApplicationID=:ID,Name='" + ":Name'" + ")", null, {
                 save: saveAction,

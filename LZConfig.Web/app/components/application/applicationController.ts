@@ -15,7 +15,7 @@
 
         variableType:string;
 
-        selectedVariable:lzconfig.IApplicationVariable;
+        selectedVariable: lzconfig.IApplicationVariable;
 
         onClickTab(tab) {
             this.currentTab = tab.url;
@@ -35,21 +35,22 @@
             if (!this.selectedVariable)
                 return 'display';
 
-            if (variable.Name === this.selectedVariable.Name) return 'edit';
-            else return 'display';
+             if (variable.Name === this.selectedVariable.Name)
+                return 'edit';
+            else
+                return 'display';
         }
 
         saveApplication() {
             console.log("saveApplication:" + JSON.stringify(this.application));
             var applicationResource = this.dataAccessService.getApplicationResource();
-
             var applicationToSave: lzconfig.ApplicationVM = new lzconfig.ApplicationVM(this.application.ID, this.application.Name, this.application.Description, this.application.URL, this.application.CreatedBy, this.application.CreatedDate, "user", new Date());
             applicationResource.save(applicationToSave);
             this.getApplication();
         }
 
         deleteApplication() {
-            if (!confirm("Are you sure you want to delte the appliction?"))
+            if (!confirm("Are you sure you want to delete the appliction?"))
                 return;
             console.log("deleteApplication:" + JSON.stringify(this.application));
             var applicationResource = this.dataAccessService.getApplicationResource();
@@ -62,7 +63,7 @@
 
         editVariable = function (variable) {
             console.log("editVariable:" + JSON.stringify(variable));
-            this.selected = angular.copy(variable);
+            this.selectedVariable = angular.copy(variable);
         };
 
         deleteVariable = function (index: number) {
@@ -72,7 +73,6 @@
             var variable = this.application.tblApplicationVariable[index];
             console.log("deleteVariable:" + JSON.stringify(variable));
             var applicationVariableResource = this.dataAccessService.getApplicationVariableResource();
-            //this.dataAccessService.performUpdate = true;
             applicationVariableResource.delete(variable)
                 .$promise
                 .then((data: any) => { console.log(data);
@@ -85,7 +85,7 @@
             console.log("newVariable called");
             this.variableType = inputType;
             var user = "user";
-            var variable:lzconfig.ApplicationVariable = new lzconfig.ApplicationVariable(this.application.ID, null, null, null, user, new Date(), user, new Date());
+            var variable: lzconfig.ApplicationVariable = new lzconfig.ApplicationVariable(this.application.ID, null, null, inputType === "password", user,  null, user, null);
             console.log("newVariable:" + JSON.stringify(variable));
             this.application.tblApplicationVariable.push(variable);
             this.selectedVariable = variable;
@@ -98,19 +98,25 @@
 
         saveVariable(variable: lzconfig.ApplicationVariable) {
             console.log("saveVariable:" + JSON.stringify(variable));
-
+            this.dataAccessService.performUpdate = !(variable.CreatedDate == null);
             var applicationVariableResource = this.dataAccessService.getApplicationVariableResource();
-            this.dataAccessService.performUpdate = false;
+            if (variable.CreatedDate == null)
+                variable.CreatedDate = new Date();
+            if (variable.ModifiedDate == null)
+                variable.ModifiedDate = new Date();
             applicationVariableResource.save(variable)
                 .$promise
-                .then((data: any) => { console.log(data) })
+                .then((data: any) => {
+                    console.log(data);
+                    this.getApplication();
+                })
                 .catch((response) => { console.log(response) });
         }
 
         editConnection(connection: lzconfig.IApplicationConnection) {
 
             if (connection == null)
-                connection = new lzconfig.ApplicationConnection(this.application.ID, null, null, null, null, null, null, "new", new Date(), "user", new Date());
+                connection = new lzconfig.ApplicationConnection(this.application.ID, null, null, null, null, null, null, "user", null, "user", null);
             var modalInstance = this.$uibModal.open({
                 animation: true,
                 templateUrl: 'app/components/connections/applicationConnectionView.html',
@@ -139,6 +145,7 @@
         };
 
         private getApplication() {
+            this.selectedVariable = null;
             var applicationResource = this.dataAccessService.getApplicationResource();
             applicationResource.get({ id: this.$routeParams.ID  },
                 (data: lzconfig.IApplication) => {

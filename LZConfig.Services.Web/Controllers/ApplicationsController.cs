@@ -29,6 +29,9 @@ namespace Lubrizol.LZConfig.Services.Web.Controllers
     builder.EntitySet<tblApplicationVariable>("tblApplicationVariable"); 
     config.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
+    /// <summary>
+    /// Controller: Applications
+    /// </summary>
     public class ApplicationsController : ODataController
     {
         private LZConfigContext db = new LZConfigContext();
