@@ -53,6 +53,10 @@ li {
     background-color:#0066cc!important;
 }
 
+#logo{
+    margin:8px;
+}
+
 .ul-tab {
     list-style: none;
     padding: 0;
@@ -66,4 +70,7 @@ li {
     padding: 5px 5px 0px 5px;
     background-color: #CCC;
     color: #696969;
+}
+
+.panel-heading {
 }
