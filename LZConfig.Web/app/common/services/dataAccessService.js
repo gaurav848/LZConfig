@@ -2,16 +2,17 @@ var lzconfig;
 (function (lzconfig) {
     var services;
     (function (services) {
-        var BASEURL = "http://localhost/LZConfig.Services/odata/";
         var DataAccessService = (function () {
-            function DataAccessService($resource) {
+            function DataAccessService($resource, $location) {
                 this.$resource = $resource;
+                this.$location = $location;
+                this.BASEURL = "http://" + this.$location.host() + "/LZConfig.Services/odata/";
                 this.performUpdate = true;
             }
             DataAccessService.prototype.getApplicationResource = function () {
                 var queryAction = {
                     method: 'GET',
-                    url: BASEURL + "Applications",
+                    url: this.BASEURL + "Applications",
                     isArray: false
                 };
                 //const getAction: ng.resource.IActionDescriptor = {
@@ -21,23 +22,23 @@ var lzconfig;
                 //};
                 var getAction = {
                     method: 'GET',
-                    url: BASEURL + "Applications(:id)",
+                    url: this.BASEURL + "Applications(:id)",
                     params: { $expand: "tblApplicationConnection,tblApplicationVariable" }
                 };
                 var createAction = {
                     method: 'POST',
-                    url: BASEURL + "Applications(:ID)",
+                    url: this.BASEURL + "Applications(:ID)",
                     params: { ID: "@ID" },
                     isArray: false
                 };
                 var updateAction = {
                     method: 'PUT',
-                    url: BASEURL + "Applications(:ID)",
+                    url: this.BASEURL + "Applications(:ID)",
                     params: { ID: "@ID" }
                 };
                 var deleteAction = {
                     method: 'DELETE',
-                    url: BASEURL + "Applications(:ID)",
+                    url: this.BASEURL + "Applications(:ID)",
                     params: { ID: "@ID" },
                     isArray: false
                 };
@@ -47,7 +48,7 @@ var lzconfig;
                 else
                     saveAction = createAction;
                 //angular.extend(this.$resource.prototype, 
-                return this.$resource(BASEURL + "Applications(:id)", null, {
+                return this.$resource(this.BASEURL + "Applications(:id)", null, {
                     query: queryAction,
                     get: getAction,
                     save: saveAction,
@@ -58,18 +59,18 @@ var lzconfig;
             DataAccessService.prototype.getApplicationVariableResource = function () {
                 var createAction = {
                     method: 'POST',
-                    url: BASEURL + "ApplicationVariables",
+                    url: this.BASEURL + "ApplicationVariables",
                     params: null,
                     isArray: false
                 };
                 var updateAction = {
                     method: 'PUT',
-                    url: BASEURL + "ApplicationVariables(ApplicationID=:ID,Name='" + ":Name'" + ")",
+                    url: this.BASEURL + "ApplicationVariables(ApplicationID=:ID,Name='" + ":Name'" + ")",
                     params: { ID: "@ApplicationID", Name: "@Name" }
                 };
                 var deleteAction = {
                     method: 'DELETE',
-                    url: BASEURL + "ApplicationVariables(ApplicationID=:ApplicationID,Name='" + ":Name'" + ")",
+                    url: this.BASEURL + "ApplicationVariables(ApplicationID=:ApplicationID,Name='" + ":Name'" + ")",
                     params: { ID: "@ApplicationID", Name: "@Name" },
                     isArray: false
                 };
@@ -81,7 +82,7 @@ var lzconfig;
                     saveAction = createAction;
                 //saveAction = createAction;
                 //angular.extend(this.$resource.prototype, 
-                return this.$resource(BASEURL + "ApplicationVariables(ApplicationID=:ID,Name='" + ":Name'" + ")", null, {
+                return this.$resource(this.BASEURL + "ApplicationVariables(ApplicationID=:ID,Name='" + ":Name'" + ")", null, {
                     save: saveAction,
                     delete: deleteAction,
                     create: createAction
@@ -90,18 +91,18 @@ var lzconfig;
             DataAccessService.prototype.getApplicationConnectionResource = function () {
                 var createAction = {
                     method: 'POST',
-                    url: BASEURL + "ApplicationConnections",
+                    url: this.BASEURL + "ApplicationConnections",
                     params: null,
                     isArray: false
                 };
                 var updateAction = {
                     method: 'PUT',
-                    url: BASEURL + "ApplicationConnections(ApplicationID=:ID,Name='" + ":Name'" + ")",
+                    url: this.BASEURL + "ApplicationConnections(ApplicationID=:ID,Name='" + ":Name'" + ")",
                     params: { ID: "@ApplicationID", Name: "@Name" }
                 };
                 var deleteAction = {
                     method: 'DELETE',
-                    url: BASEURL + "ApplicationConnections(ApplicationID=:ApplicationID,Name='" + ":Name'" + ")",
+                    url: this.BASEURL + "ApplicationConnections(ApplicationID=:ApplicationID,Name='" + ":Name'" + ")",
                     params: { ID: "@ApplicationID", Name: "@Name" },
                     isArray: false
                 };
@@ -111,7 +112,7 @@ var lzconfig;
                 else
                     saveAction = createAction;
                 console.log("performUpdate:" + this.performUpdate);
-                return this.$resource(BASEURL + "ApplicationConnections(ApplicationID=:ID,Name='" + ":Name'" + ")", null, {
+                return this.$resource(this.BASEURL + "ApplicationConnections(ApplicationID=:ID,Name='" + ":Name'" + ")", null, {
                     save: saveAction,
                     delete: deleteAction
                 });
@@ -119,14 +120,14 @@ var lzconfig;
             DataAccessService.prototype.getConnectionTypeResource = function () {
                 var queryAction = {
                     method: 'GET',
-                    url: BASEURL + "ConnectionTypes",
+                    url: this.BASEURL + "ConnectionTypes",
                     isArray: false
                 };
-                return this.$resource(BASEURL + "ConnectionTypes(:id)", null, {
+                return this.$resource(this.BASEURL + "ConnectionTypes(:id)", null, {
                     query: queryAction
                 });
             };
-            DataAccessService.$inject = ["$resource"];
+            DataAccessService.$inject = ["$resource", "$location"];
             return DataAccessService;
         }());
         services.DataAccessService = DataAccessService;

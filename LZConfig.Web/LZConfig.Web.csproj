@@ -122,6 +122,7 @@
     <Content Include="app\components\connections\applicationConnectionView.html" />
     <Content Include="app\components\variables\applicationVariablesView.html" />
     <Content Include="app\components\application\applicationView.html" />
+    <Content Include="App_Data\AzMan.xml" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -968,8 +969,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="app\images\" />
     <Folder Include="app\layout\" />
-    <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

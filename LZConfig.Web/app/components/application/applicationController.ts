@@ -43,8 +43,9 @@
 
         saveApplication() {
             console.log("saveApplication:" + JSON.stringify(this.application));
+            this.dataAccessService.performUpdate = !(this.application.CreatedDate == null);
             var applicationResource = this.dataAccessService.getApplicationResource();
-            var applicationToSave: lzconfig.ApplicationVM = new lzconfig.ApplicationVM(this.application.ID, this.application.Name, this.application.Description, this.application.URL, this.application.CreatedBy, this.application.CreatedDate, "user", new Date());
+            var applicationToSave: lzconfig.ApplicationVM = new lzconfig.ApplicationVM(this.application.ID, this.application.Name, this.application.Description, this.application.URL, "user", new Date(), "user", new Date());
             applicationResource.save(applicationToSave);
             this.getApplication();
         }
@@ -54,7 +55,8 @@
                 return;
             console.log("deleteApplication:" + JSON.stringify(this.application));
             var applicationResource = this.dataAccessService.getApplicationResource();
-            applicationResource.delete({ID: this.application.ID});
+            applicationResource.delete({ ID: this.application.ID });
+            //this.$location.path("/applicationList");
         }
 
         cancelApplication() {

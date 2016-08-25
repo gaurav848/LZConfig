@@ -1,7 +1,5 @@
 ﻿namespace lzconfig.services {
 
-    const BASEURL = "http://localhost/LZConfig.Services/odata/";
-
     export interface IApplicationResource
         extends ng.resource.IResource<lzconfig.IApplication> {
         //create(data: any): lzconfig.domain.IApplication;
@@ -36,15 +34,18 @@
 
         public performUpdate: boolean;   
 
-        static $inject = ["$resource"];
-        constructor(private $resource: ng.resource.IResourceService) {
+        BASEURL = "http://" + this.$location.host() + "/LZConfig.Services/odata/";
+
+        static $inject = ["$resource", "$location"];
+        constructor(private $resource: ng.resource.IResourceService,
+            private $location: ng.ILocationService) {
             this.performUpdate = true;
         }
 
         getApplicationResource(): ng.resource.IResourceClass<IApplicationResource> {
             const queryAction: ng.resource.IActionDescriptor = {
                 method: 'GET',
-                url: BASEURL + "Applications",
+                url: this.BASEURL + "Applications",
                 isArray: false
             };
             //const getAction: ng.resource.IActionDescriptor = {
@@ -54,23 +55,23 @@
             //};
             const getAction: ng.resource.IActionDescriptor = {
                 method: 'GET',
-                url: BASEURL + "Applications(:id)",
+                url: this.BASEURL + "Applications(:id)",
                 params: { $expand: "tblApplicationConnection,tblApplicationVariable"}
             };
             const createAction: ng.resource.IActionDescriptor = {
                 method: 'POST',
-                url: BASEURL + "Applications(:ID)",
+                url: this.BASEURL + "Applications(:ID)",
                 params: { ID: "@ID" },
                 isArray: false
             };
             const updateAction: ng.resource.IActionDescriptor = {
                 method: 'PUT',
-                url: BASEURL + "Applications(:ID)",
+                url: this.BASEURL + "Applications(:ID)",
                 params: { ID: "@ID" }
             };
             const deleteAction: ng.resource.IActionDescriptor = {
                 method: 'DELETE',
-                url: BASEURL + "Applications(:ID)",
+                url: this.BASEURL + "Applications(:ID)",
                 params: { ID: "@ID" },
                 isArray: false
             };
@@ -83,7 +84,7 @@
 
             //angular.extend(this.$resource.prototype, 
 
-            return this.$resource(BASEURL + "Applications(:id)", null, {
+            return this.$resource(this.BASEURL + "Applications(:id)", null, {
                 query: queryAction,
                 get: getAction,
                 save: saveAction,
@@ -95,18 +96,18 @@
         getApplicationVariableResource(): ng.resource.IResourceClass<IApplicationVariableResource> {
             const createAction: ng.resource.IActionDescriptor = {
                 method: 'POST',
-                url: BASEURL + "ApplicationVariables",
+                url: this.BASEURL + "ApplicationVariables",
                 params: null,
                 isArray: false
             };
             const updateAction: ng.resource.IActionDescriptor = {
                 method: 'PUT',
-                url: BASEURL + "ApplicationVariables(ApplicationID=:ID,Name='" + ":Name'" + ")",
+                url: this.BASEURL + "ApplicationVariables(ApplicationID=:ID,Name='" + ":Name'" + ")",
                 params: { ID: "@ApplicationID", Name: "@Name"  }
             };
             const deleteAction: ng.resource.IActionDescriptor = {
                 method: 'DELETE',
-                url: BASEURL + "ApplicationVariables(ApplicationID=:ApplicationID,Name='" + ":Name'" + ")",
+                url: this.BASEURL + "ApplicationVariables(ApplicationID=:ApplicationID,Name='" + ":Name'" + ")",
                 params: { ID: "@ApplicationID", Name: "@Name" },
                 isArray: false
             };
@@ -121,7 +122,7 @@
             //saveAction = createAction;
             //angular.extend(this.$resource.prototype, 
 
-            return this.$resource(BASEURL + "ApplicationVariables(ApplicationID=:ID,Name='" + ":Name'" + ")", null, {
+            return this.$resource(this.BASEURL + "ApplicationVariables(ApplicationID=:ID,Name='" + ":Name'" + ")", null, {
                 save: saveAction,
                 delete: deleteAction,
                 create: createAction
@@ -131,18 +132,18 @@
         getApplicationConnectionResource(): ng.resource.IResourceClass<IApplicationConnectionResource> {
             const createAction: ng.resource.IActionDescriptor = {
                 method: 'POST',
-                url: BASEURL + "ApplicationConnections",
+                url: this.BASEURL + "ApplicationConnections",
                 params: null,
                 isArray: false
             };
             const updateAction: ng.resource.IActionDescriptor = {
                 method: 'PUT',
-                url: BASEURL + "ApplicationConnections(ApplicationID=:ID,Name='" + ":Name'" + ")",
+                url: this.BASEURL + "ApplicationConnections(ApplicationID=:ID,Name='" + ":Name'" + ")",
                 params: { ID: "@ApplicationID", Name: "@Name" }
             };
             const deleteAction: ng.resource.IActionDescriptor = {
                 method: 'DELETE',
-                url: BASEURL + "ApplicationConnections(ApplicationID=:ApplicationID,Name='" + ":Name'" + ")",
+                url: this.BASEURL + "ApplicationConnections(ApplicationID=:ApplicationID,Name='" + ":Name'" + ")",
                 params: { ID: "@ApplicationID", Name: "@Name" },
                 isArray: false
             };
@@ -154,7 +155,7 @@
                 saveAction = createAction;
             
             console.log("performUpdate:" + this.performUpdate);
-            return this.$resource(BASEURL + "ApplicationConnections(ApplicationID=:ID,Name='" + ":Name'" + ")", null, {
+            return this.$resource(this.BASEURL + "ApplicationConnections(ApplicationID=:ID,Name='" + ":Name'" + ")", null, {
                 save: saveAction,
                 delete: deleteAction
             });
@@ -163,11 +164,11 @@
         getConnectionTypeResource(): ng.resource.IResourceClass<IConnectionTypeResource> {
             const queryAction: ng.resource.IActionDescriptor = {
                 method: 'GET',
-                url: BASEURL + "ConnectionTypes",
+                url: this.BASEURL + "ConnectionTypes",
                 isArray: false
             };
 
-            return this.$resource(BASEURL + "ConnectionTypes(:id)", null, {
+            return this.$resource(this.BASEURL + "ConnectionTypes(:id)", null, {
                 query: queryAction
             });
         }

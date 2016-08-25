@@ -1,3 +1,4 @@
+using Lubrizol.LZConfig.Core.Configuration;
 using Lubrizol.LZConfig.Entities;
 
 namespace Lubrizol.LZConfig.Data
@@ -10,7 +11,7 @@ namespace Lubrizol.LZConfig.Data
     public partial class LZConfigContext : DbContext
     {
         public LZConfigContext()
-            : base("name=LZConfigContext")
+            : base(ConfigHelper.GetDefaultConnectionString())
         {
         }
 

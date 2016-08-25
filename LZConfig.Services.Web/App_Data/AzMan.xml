@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AzAdminManager MajorVersion="1" MinorVersion="0" Guid="8a56e69f-844e-481a-b60f-37101b467dc3">
+	<AzApplication Guid="f14bd336-914d-42de-9168-666a86ccdce6" Name="LZConfig" Description="" ApplicationVersion=""><AzTask Guid="3eb52c84-4a82-48a5-aba4-78f5fc25dec6" Name="User" Description="" BizRuleImportedPath="" RoleDefinition="True"/><AzRole Guid="b55b2e45-2983-4fc5-879d-7037537daefe" Name="User"><TaskLink>3eb52c84-4a82-48a5-aba4-78f5fc25dec6</TaskLink><Member>S-1-5-21-1177714155-1788224565-938742375-60987</Member></AzRole></AzApplication></AzAdminManager>

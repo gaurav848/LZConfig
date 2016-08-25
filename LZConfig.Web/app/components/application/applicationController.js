@@ -69,8 +69,9 @@ var lzconfig;
         };
         ApplicationController.prototype.saveApplication = function () {
             console.log("saveApplication:" + JSON.stringify(this.application));
+            this.dataAccessService.performUpdate = !(this.application.CreatedDate == null);
             var applicationResource = this.dataAccessService.getApplicationResource();
-            var applicationToSave = new lzconfig.ApplicationVM(this.application.ID, this.application.Name, this.application.Description, this.application.URL, this.application.CreatedBy, this.application.CreatedDate, "user", new Date());
+            var applicationToSave = new lzconfig.ApplicationVM(this.application.ID, this.application.Name, this.application.Description, this.application.URL, "user", new Date(), "user", new Date());
             applicationResource.save(applicationToSave);
             this.getApplication();
         };
@@ -80,6 +81,7 @@ var lzconfig;
             console.log("deleteApplication:" + JSON.stringify(this.application));
             var applicationResource = this.dataAccessService.getApplicationResource();
             applicationResource.delete({ ID: this.application.ID });
+            //this.$location.path("/applicationList");
         };
         ApplicationController.prototype.cancelApplication = function () {
             this.$location.path("/applicationList");

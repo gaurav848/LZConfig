@@ -65,6 +65,8 @@ namespace Lubrizol.LZConfig.Services.Web.Controllers
             {
                 return NotFound();
             }
+            var userName = User.Identity.Name;
+            patch.GetEntity().ModifiedBy = userName.Substring(userName.LastIndexOf(@"\")+1);
             patch.GetEntity().ModifiedDate = DateTime.Now;
 
             patch.Put(tblApplicationVariable);
@@ -96,6 +98,12 @@ namespace Lubrizol.LZConfig.Services.Web.Controllers
             {
                 return BadRequest(ModelState);
             }
+            var userName = User.Identity.Name;
+            tblApplicationVariable.CreatedBy = userName.Substring(userName.LastIndexOf(@"\") + 1);
+            tblApplicationVariable.CreatedDate = DateTime.Now;
+            tblApplicationVariable.ModifiedBy = tblApplicationVariable.CreatedBy;
+            tblApplicationVariable.ModifiedDate = DateTime.Now;
+
 
             db.tblApplicationVariable.Add(tblApplicationVariable);
 
