@@ -20,4 +20,3 @@ var lzconfig;
         .module("LZConfig")
         .controller("ApplicationListController", ApplicationListController);
 })(lzconfig || (lzconfig = {}));
-//# sourceMappingURL=applicationListController.js.map

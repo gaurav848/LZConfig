@@ -6,4 +6,3 @@ var lzconfig;
         angular.module(services.moduleName, ["ngResource"]);
     })(services = lzconfig.services || (lzconfig.services = {}));
 })(lzconfig || (lzconfig = {}));
-//# sourceMappingURL=common.services.js.map

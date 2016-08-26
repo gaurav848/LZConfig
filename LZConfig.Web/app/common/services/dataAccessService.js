@@ -136,4 +136,3 @@ var lzconfig;
             .service("dataAccessService", DataAccessService);
     })(services = lzconfig.services || (lzconfig.services = {}));
 })(lzconfig || (lzconfig = {}));
-//# sourceMappingURL=dataAccessService.js.map
